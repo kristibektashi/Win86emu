@@ -1,4 +1,1 @@
-﻿  stdafx.cpp
-  dllmain.cpp
-  gdi32.cpp
-ARM\Release\dllmain.obj : fatal error LNK1112: モジュールのコンピューターの種類 'x86' は対象コンピューターの種類 'ARM' と競合しています。
+﻿
