@@ -44,6 +44,31 @@ Config * control=0;
 
 typedef DWORD __fastcall func(DWORD*);
 
+/*
+static LPCRITICAL_SECTION CSEmul=0;
+
+class CLock1
+{
+public:
+    CLock1(LPCRITICAL_SECTION *Cs)
+    {
+    }
+    void Lock()
+    {
+    }
+    void Unlock()
+    {
+    }
+    ~CLock1()
+    {
+    }
+	void FreeCS()
+	{
+	}
+};
+static CLock1 L(&CSEmul); 
+*/
+
 void GFX_SetTitle(Bit32s cycles ,Bits frameskip,bool paused)
 {
 //	printf("cycles=%d, frameskip=%d, paused=%d\n",cycles,frameskip,paused);
@@ -77,6 +102,8 @@ static Bitu Normal_Loop(void) {
 			Bitu blah=(*CallBack_Handlers[ret])();
 			if (GCC_UNLIKELY(blah)) return blah;
 		}
+//		if(reg_eip>=(DWORD)Return_to_host && reg_eip<3+(DWORD)Return_to_host)
+//			break;
 	}
 	return 0;
 }
@@ -91,6 +118,168 @@ void GFX_ShowMsg(char const *fmt,...)
 	va_start(va,fmt);
 	vprintf(fmt,va);
 }
+
+/*
+Bit8u mem_readb(PhysPt address) {
+	return *(Bit8u*)(address);
+}
+
+Bit16u mem_readw(PhysPt address) {
+	return *(Bit16u*)(address);
+}
+
+Bit32u mem_readd(PhysPt address) {
+	return *(Bit32u*)(address);
+}
+
+void mem_writeb(PhysPt address,Bit8u val) {
+	*(Bit8u*)address=val;
+}
+
+void mem_writew(PhysPt address,Bit16u val) {
+	*(Bit16u*)address=val;
+}
+
+void mem_writed(PhysPt address,Bit32u val) {
+	*(Bit32u*)address=val;
+}
+
+bool mem_unalignedreadb_checked(PhysPt address, Bit8u * val) {
+//	__try {
+        *val=mem_readb(address+0);
+//	} __except(EXCEPTION_EXECUTE_HANDLER)
+//	{
+//        return true;
+//	}
+    return false;
+}
+
+bool mem_unalignedreadw_checked(PhysPt address, Bit16u * val) {
+	Bit8u rval1,rval2;
+//	__try {
+        rval1=mem_readb(address+0);
+        rval2=mem_readb(address+1);
+        *val=(Bit16u)(((Bit8u)rval1) | (((Bit8u)rval2) << 8));
+//	} __except(EXCEPTION_EXECUTE_HANDLER)
+//	{
+//        return true;
+//	}
+    return false;
+}
+
+bool mem_unalignedreadd_checked(PhysPt address, Bit32u * val) {
+	Bit8u rval1,rval2,rval3,rval4;
+//	__try {
+        rval1=mem_readb(address+0);
+        rval2=mem_readb(address+1);
+        rval3=mem_readb(address+2);
+        rval4=mem_readb(address+3);
+        *val=(Bit32u)(((Bit8u)rval1) | (((Bit8u)rval2) << 8) | (((Bit8u)rval3) << 16) | (((Bit8u)rval4) << 24));
+//	} __except(EXCEPTION_EXECUTE_HANDLER)
+//	{
+//        return true;
+//	}
+    return false;
+}
+
+bool mem_writeb_checked(PhysPt address,Bit8u val);
+
+bool mem_unalignedwriteb_checked(PhysPt address,Bit8u val) {
+//	__try {
+        mem_writeb(address+0,val);
+//	} __except(EXCEPTION_EXECUTE_HANDLER)
+//	{
+//        return true;
+//	}
+    return false;
+}
+
+bool mem_unalignedwritew_checked(PhysPt address,Bit16u val) {
+        if (mem_writeb_checked(address,(Bit8u)(val & 0xff))) return true;val>>=8;
+        if (mem_writeb_checked(address+1,(Bit8u)(val & 0xff))) return true;
+        return false;
+}
+
+bool mem_unalignedwrited_checked(PhysPt address,Bit32u val) {
+        if (mem_writeb_checked(address,(Bit8u)(val & 0xff))) return true;val>>=8;
+        if (mem_writeb_checked(address+1,(Bit8u)(val & 0xff))) return true;val>>=8;
+        if (mem_writeb_checked(address+2,(Bit8u)(val & 0xff))) return true;val>>=8;
+        if (mem_writeb_checked(address+3,(Bit8u)(val & 0xff))) return true;
+        return false;
+}
+
+void mem_unalignedwritew(PhysPt address,Bit16u val) {
+        mem_writeb(address,(Bit8u)val);val>>=8;
+        mem_writeb(address+1,(Bit8u)val);
+}
+
+void mem_unalignedwrited(PhysPt address,Bit32u val) {
+        mem_writeb(address,(Bit8u)val);val>>=8;
+        mem_writeb(address+1,(Bit8u)val);val>>=8;
+        mem_writeb(address+2,(Bit8u)val);val>>=8;
+        mem_writeb(address+3,(Bit8u)val);
+}
+
+Bit16u mem_unalignedreadw(PhysPt address) {
+        return mem_readb(address) |
+                mem_readb(address+1) << 8;
+}
+
+Bit32u mem_unalignedreadd(PhysPt address) {
+        return mem_readb(address) |
+                (mem_readb(address+1) << 8) |
+                (mem_readb(address+2) << 16) |
+                (mem_readb(address+3) << 24);
+}
+
+Bit8u mem_readb_inline(PhysPt address) {
+	return mem_readb(address);
+}
+Bit16u mem_readw_inline(PhysPt address) {
+	return mem_readw(address);
+}
+Bit32u mem_readd_inline(PhysPt address) {
+	return mem_readd(address);
+}
+void mem_writeb_inline(PhysPt address,Bit8u val) {
+	mem_writeb(address,val);
+}
+void mem_writew_inline(PhysPt address,Bit16u val) {
+	mem_writew(address,val);
+}
+void mem_writed_inline(PhysPt address,Bit32u val) {
+	mem_writed(address,val);
+}
+bool mem_readb_checked(PhysPt address, Bit8u * val) {
+	return mem_unalignedreadb_checked(address,val);
+}
+bool mem_readw_checked(PhysPt address, Bit16u * val) {
+	return mem_unalignedreadw_checked(address,val);
+}
+bool mem_readd_checked(PhysPt address, Bit32u * val) {
+	return mem_unalignedreadd_checked(address,val);
+}
+bool mem_writeb_checked(PhysPt address,Bit8u val) {
+	return mem_unalignedwriteb_checked(address,val);
+}
+bool mem_writew_checked(PhysPt address,Bit16u val) {
+	return mem_unalignedwritew_checked(address,val);
+}
+bool mem_writed_checked(PhysPt address,Bit32u val) {
+	return mem_unalignedwrited_checked(address,val);
+}
+*/
+
+/*
+class PageHandler;
+void MEM_SetPageHandler(Bitu phys_page, Bitu pages, PageHandler * handler)
+{
+}
+PageHandler* MEM_GetPageHandler(Bitu phys_page)
+{
+	return 0;
+}
+*/
 
 void IO_WriteB(Bitu port,Bitu val) {
 	printf("WriteB %d to %d\n",val,port);
@@ -149,15 +338,32 @@ DWORD GetHookAddress(char* Dll, char*FuncName)
 	return R;
 }
 
+/*
+extern "C" EMU_EXPORT void L_Lock()
+{
+//	L.Lock();
+	Segs.phys[4]=GetFSBase();			// for dyngen 
+}
+
+extern "C" EMU_EXPORT void L_Unlock()
+{
+//	L.Unlock();
+}
+*/
+
 Bitu IO_ReadD(Bitu port) {
 	if(port==0xe5)
 	{
 		DWORD *Param=(DWORD*)reg_eax;
 		DWORD Func=*(DWORD*)(reg_eip-4);
 
+		// CPU_Regs old_cpu_regs;
+		// CPUBlock old_cpu;
+
 		if((0x80000000&Func)==0)
 		{
 			Func=0x80000000|(DWORD)GetHookAddress(((char**)Func)[0],((char**)Func)[1]);
+#if 1//def _DEBUG
 			if(0x80000000==Func)
 			{
 				Func=*(DWORD*)(reg_eip-4);
@@ -169,9 +375,13 @@ Bitu IO_ReadD(Bitu port) {
 				LogErr("Func %s not found in %s\n",Name,Dll);
 				Func=0x80000000;
 			}
+#endif
 			*(DWORD*)(reg_eip-4)=Func;
 		}
 
+		// old_cpu_regs=cpu_regs;
+		// old_cpu=cpu;
+//		L.Unlock();
 		int tmp=0;
 		if(0x80000000==Func)
 #ifndef _DEBUG
@@ -188,6 +398,10 @@ Bitu IO_ReadD(Bitu port) {
 #endif
 		}
 Skip:
+// 		L.Lock();
+// 		Segs.phys[4]=GetFSBase();			// for dyngen 
+// 		cpu=old_cpu;
+// 		cpu_regs=old_cpu_regs;
 		reg_eax=tmp;
 	}
 	return reg_eax;
@@ -200,6 +414,7 @@ void DOSBOX_RunMachine(void){
 
 static void DOSBOX_RealInit(Section * sec) {
 	Section_prop * section=static_cast<Section_prop *>(sec);
+	/* Initialize some dosbox internals */
 
 	DOSBOX_SetNormalLoop();
 }
@@ -241,11 +456,21 @@ void ReuseStack(void *Ptr)
 const int CPUC=1000000;
 EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)	// max 100 params
 {
+	// CPU_Regs my_cpu_regs=cpu_regs;	// just to set them with some values
+	// CPUBlock my_cpu=cpu;
 	cpu.code.big=true;
 	cpu.stack.big=true;
 	cpu.stack.mask=0xffffffff;
 	cpu.stack.notmask=0;
 
+// 	my_cpu.code.big=true;
+// 	my_cpu.stack.big=true;
+// 	my_cpu.stack.mask=0xffffffff;
+// 	my_cpu.stack.notmask=0;
+
+// #define my_reg_esp my_cpu_regs.regs[REGI_SP].dword[DW_INDEX]
+// #define my_reg_eax my_cpu_regs.regs[REGI_AX].dword[DW_INDEX]
+// #define my_reg_eip my_cpu_regs.ip.dword[DW_INDEX]
 #define my_reg_esp cpu_regs.regs[REGI_SP].dword[DW_INDEX]
 #define my_reg_eax cpu_regs.regs[REGI_AX].dword[DW_INDEX]
 #define my_reg_eip cpu_regs.ip.dword[DW_INDEX]
@@ -270,10 +495,27 @@ EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)	// max 100 params
 	TEB[2]=EMU_STACK_SIZE;
 
     Bitu ret;
+	// CPU_Regs old_cpu_regs;
+	// CPUBlock old_cpu;
 	Segs.phys[4]=GetFSBase();			// for dyngen 
 	do {
+// 		L.Lock();
+// 		Segs.phys[4]=GetFSBase();			// for dyngen 
+// 		old_cpu_regs=cpu_regs;
+// 		old_cpu=cpu;
+
+// 		cpu_regs=my_cpu_regs;
+// 		cpu=my_cpu;
+
+// 		CPU_Cycles=200000;
 		CPU_Cycles=CPUC;
         ret=(*loop)();
+
+// 		my_cpu_regs=cpu_regs;
+// 		my_cpu=cpu;
+// 		cpu_regs=old_cpu_regs;
+// 		cpu=old_cpu;
+// 		L.Unlock();
 
 		if(CbIsReturnToHost(my_reg_eip))
 			break;

@@ -124,8 +124,36 @@ void BX_CPU_C::cpu_loop(Bit32u max_instr_count)
 
   while (1) {
 #ifdef _DEBUG
-//	if(DoOut)
-//		printf("%08x\t",RIP);
+	// if(DoOut)
+	// 	printf("%08x\t",RIP);
+	// if(FixAddr&& ((RIP>=(FixAddr+0x8f50) && RIP<(FixAddr+0x94b0)) || (RIP>=(FixAddr+0x9df0) && RIP<(FixAddr+0x9eb0))))
+	// {
+	// 	for(int i=PREV_MAX-1; i>=0; i--)
+	// 		PrevIP[i+1] = PrevIP[i];
+	// 	PrevIP[0] = RIP;
+	// 	for(int i=PREV_MAX-1; i>=0; i--)
+	// 		PrevSP[i+1] = PrevSP[i];
+	// 	PrevSP[0] = ESP;
+	// } 
+	// {
+	// 	for(int i=PPREV_MAX-1; i>=0; i--)
+	// 		PPrevIP[i+1] = PPrevIP[i];
+	// 	PPrevIP[0] = RIP;
+	// 	for(int i=PPREV_MAX-1; i>=0; i--)
+	// 		PPrevSP[i+1] = PPrevSP[i];
+	// 	PPrevSP[0] = ESP;
+	// }
+
+	// if((RIP&0xFFFF)==0x8F50 && *(DWORD*)RIP==0x5330ec83)
+	// {
+	// 	if(FixAddr==0)
+	// 		FixAddr=RIP&0xFFFF0000;
+	// 	SaveIP=RIP;
+	// 	SaveSP=ESP;
+	// 	SaveRET=*(DWORD*)ESP;
+	// 	if((SaveRET&0xFFFF0000)==0)
+	// 		__debugbreak();
+	// }
 	PrevIP[PrevPos] = RIP;
 	PrevSP[PrevPos] = ESP;		
 	PrevPos=(PrevPos+1)%PREV_MAX;
