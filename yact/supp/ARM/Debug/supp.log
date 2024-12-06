@@ -1,0 +1,9 @@
+﻿cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
+  stdafx.cpp
+cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
+  dllmain.cpp
+cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
+  supp.cpp
+U:\DynamicTranslator\yact\supp\supp.cpp(150,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     ライブラリ U:\DynamicTranslator\ARM\Debug\supp.nt.lib とオブジェクト U:\DynamicTranslator\ARM\Debug\supp.nt.exp を作成中
+  supp.vcxproj -> U:\DynamicTranslator\ARM\Debug\supp.nt.dll

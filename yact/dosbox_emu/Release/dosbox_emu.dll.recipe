@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>U:\DynamicTranslator\Win32\Release\supp.nt.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\DynamicTranslator\Win32\Release\x86_emu.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\DynamicTranslator\Win32\Release\cbacks.nt.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\DynamicTranslator\Win32\Release\peldr.nt.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\DynamicTranslator\Win32\Release\dosbox_emu.dll</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

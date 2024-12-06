@@ -105,7 +105,7 @@
 
 // CPU level emulation. Default level is set in the configure script.
 // BX_CPU_LEVEL defines the CPU level to emulate.
-#define BX_CPU_LEVEL 5			// be compatible with no SSE in DosBox core!
+#define BX_CPU_LEVEL 6//5			// be compatible with no SSE in DosBox core!
 
 // emulate x86-64 instruction set?
 #define BX_SUPPORT_X86_64 0

@@ -141,7 +141,7 @@ CB_EXPORT DW CbCreateX86StdcallCallback(void *NativeFunc, int NumParams)
 8D4508                         lea         eax,[ebp][8]
 EB05                           jmps       .01001483E --1
 B8CCAE0310                     mov         eax,01003AECC --2
-E5E5                           in          eax,0E5 ;'ı'
+E5E5                           in          eax,0E5 ;'ÅE
 8BE5                           mov         esp,ebp
 5D                             pop         ebp
 C22000                         retn        00020 
