@@ -11,6 +11,6 @@
 *.txt
 *.obj
 .vs/
-*.recipe
+*.exe.recipe
 *.exp
 *.lib
