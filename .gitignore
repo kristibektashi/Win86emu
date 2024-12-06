@@ -7,3 +7,6 @@
 *.opensdf
 *.lpch
 *.vcxproj.user
+*.log
+*.txt
+*.obj
