@@ -147,8 +147,10 @@ bool HookInstalled = false;
 
 extern "C" __declspec(dllexport) bool CpiMakeHook()
 {
-    if (HookInstalled)
-        return true;
+	return true;//disabling cpihook
+
+	if(HookInstalled)
+		return true;
 
     HookInstalled = true;
 

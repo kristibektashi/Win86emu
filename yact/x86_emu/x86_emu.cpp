@@ -17,12 +17,17 @@ t_CbRemoveCallAtThreadExit *CbRemoveCallAtThreadExit = 0;
 
 
 typedef BOOL t_func0(void);
-typedef DWORD t_func1(DWORD Addr, int NParams, ...);
+typedef DWORD t_func1(DWORD Addr, int NParams,...);
+
+#if 0
 
 #ifdef _DEBUG
 #define NUM_DOSBOXES 1
 #else
 #define NUM_DOSBOXES 16
+#endif
+#else
+#define NUM_DOSBOXES 1
 #endif
 static t_func0 *EmuDB_Initialize[NUM_DOSBOXES];
 static t_func1 *EmuDB_Execute[NUM_DOSBOXES];

@@ -135,20 +135,20 @@ CB_EXPORT bool CbRemoveCallAtThreadExit(void* Func, void*Param)
 // Allocate memory and initialize callback to native stdcall func taking NumParams
 CB_EXPORT DW CbCreateX86StdcallCallback(void *NativeFunc, int NumParams)
 {
-    /*
-    55                             push        ebp
-    8BEC                           mov         ebp,esp
-    8D4508                         lea         eax,[ebp][8]
-    EB05                           jmps       .label1
-    B8CCAE0310                     mov         eax,01003AECC --2
-    E5E5                   label1: in          eax,0E5 ;01001483E
-    8BE5                           mov         esp,ebp
-    5D                             pop         ebp
-    C22000                         retn        00020
-    */
-    static BYTE CBCode[] = { 0x55, 0x8B, 0xEC, 0x8D, 0x45, 0x08, 0xEB, 0x05, 0xB8, 0xDE, 0xC0, 0xAD, 0xDE, 0xE5, 0xE5, 0x8B, 0xE5, 0x5D, 0xC2, 0x20, 0 };
-    if (NativeFunc == 0)
-        return 0;
+/* 
+55                             push        ebp
+8BEC                           mov         ebp,esp
+8D4508                         lea         eax,[ebp][8]
+EB05                           jmps       .label1
+B8CCAE0310                     mov         eax,01003AECC --2
+E5E5                   label1: in          eax,0E5 ;01001483E
+8BE5                           mov         esp,ebp
+5D                             pop         ebp
+C22000                         retn        00020 
+*/
+	static BYTE CBCode[]={0x55,0x8B,0xEC,0x8D,0x45,0x08,0xEB,0x05,0xB8,0xDE,0xC0,0xAD,0xDE,0xE5,0xE5,0x8B,0xE5,0x5D,0xC2,0x20,0};
+	if(NativeFunc==0)
+		return 0;
 
     CbDescr Cbd;
     Cbd.NativeFunc = (DWORD) NativeFunc;
