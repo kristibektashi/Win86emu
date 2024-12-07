@@ -1,8 +1,0 @@
-﻿cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
-  stdafx.cpp
-cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
-  dllmain.cpp
-cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
-  x86_emu.cpp
-     ライブラリ U:\DynamicTranslator\ARM\Debug\x86_emu.lib とオブジェクト U:\DynamicTranslator\ARM\Debug\x86_emu.exp を作成中
-  x86_emu.vcxproj -> U:\DynamicTranslator\ARM\Debug\x86_emu.dll
