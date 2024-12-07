@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="U:\DynamicTranslator\yact\bochs_emu\"
+				AdditionalIncludeDirectories="$(SolutionDir)yact\bochs_emu\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;DOSBOX_EMU_EXPORTS"
 				MinimalRebuild="true"
 				ExceptionHandling="0"
@@ -116,7 +116,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="U:\DynamicTranslator\yact\bochs_emu\"
+				AdditionalIncludeDirectories="$(SolutionDir)yact\bochs_emu\"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;DOSBOX_EMU_EXPORTS"
 				ExceptionHandling="0"
 				RuntimeLibrary="2"
