@@ -1,6 +1,0 @@
-﻿cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
-  gdi32.cpp
-  LINK : 前回のインクリメンタル リンクで U:\DynamicTranslator\Win32\Debug\SystemNT\gdi32.nt.dll が見つからなかったか、ビルドされませんでした。フル リンクを行います。
-dllmain.obj : warning LNK4075: /EDITANDCONTINUE は /SAFESEH の指定によって無視されます。
-     ライブラリ U:\DynamicTranslator\Win32\Debug\SystemNT\gdi32.nt.lib とオブジェクト U:\DynamicTranslator\Win32\Debug\SystemNT\gdi32.nt.exp を作成中
-  gdi32_yact.vcxproj -> U:\DynamicTranslator\Win32\Debug\SystemNT\gdi32.nt.dll
