@@ -1,16 +1,19 @@
-// yact_emu.cpp : Defines the exported functions for the DLL application.
-//
-
-#include "stdafx.h"
-#define EMU_EXPORT __declspec(dllexport)
-#include <x86emul.h>
-
-#include <peldr.h>
-#include <callbacks.h>
-#include <classes.h>
-#include <util.h>
-
-#include "yact_emu.h"
+#include "windows.h"
+BOOL APIENTRY DllMain (HMODULE hModule,
+	DWORD  ul_reason_for_call,
+	LPVOID lpReserved
+)
+{
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+	return TRUE;
+};
 
 #ifdef VC_DLL_EXPORTS
 #undef VC_DLL_EXPORTS
@@ -99,7 +102,7 @@ VC_DLL_EXPORTS void CPU_REQ_NMINTERRUPT_IN();
 
 UINT32(*i386memaccess) (int, int, int);
 
-void CPU_SET_MACTLFC(UINT32(*ptrformaf) (int, int, int))
+void CPU_SET_MACTLFC(UINT32 (*ptrformaf) (int, int, int))
 {
 	i386memaccess = ptrformaf;
 }
@@ -111,11 +114,11 @@ void CPU_BUS_SIZE_CHANGE(int size) {
 }
 
 
-UINT8 __fastcall read_byte(UINT32 byteaddress)
+UINT8 read_byte(UINT32 byteaddress)
 {
 	return ((i386memaccess(((int)byteaddress) + 0, 0, 1) & 0xFF) << (8 * 0));
 }
-UINT16 __fastcall read_word(UINT32 byteaddress)
+UINT16 read_word(UINT32 byteaddress)
 {
 	if (((cpubussize >> 0) & 0xFF) == 0) {
 		return ((i386memaccess(((int)byteaddress) + 0, 0, 1) & 0xFF) << (8 * 0)) | ((i386memaccess(((int)byteaddress) + 1, 0, 1) & 0xFF) << (8 * 1));
@@ -124,24 +127,24 @@ UINT16 __fastcall read_word(UINT32 byteaddress)
 		return ((i386memaccess(((int)byteaddress) + 0, 0, 1 | 0x10) & 0xFFFF) << (16 * 0));
 	}
 }
-UINT32 __fastcall read_dword(UINT32 byteaddress)
+UINT32 read_dword(UINT32 byteaddress)
 {
 	if (((cpubussize >> 0) & 0xFF) == 0) {
 		return ((i386memaccess(((int)byteaddress) + 0, 0, 1) & 0xFF) << (8 * 0)) | ((i386memaccess(((int)byteaddress) + 1, 0, 1) & 0xFF) << (8 * 1)) | ((i386memaccess(((int)byteaddress) + 2, 0, 1) & 0xFF) << (8 * 2)) | ((i386memaccess(((int)byteaddress) + 3, 0, 1) & 0xFF) << (8 * 3));
 	}
 	else if (((cpubussize >> 0) & 0xFF) == 1) {
-		return ((i386memaccess(((int)byteaddress) + 0, 0, 1 | 0x10) & 0xFFFF) << (16 * 0)) | ((i386memaccess(((int)byteaddress) + 2, 0, 1 | 0x10) & 0xFFFF) << (16 * 1));
+		return ((i386memaccess(((int)byteaddress) + 0, 0, 1 | 0x10) & 0xFFFF) << (16 * 0))| ((i386memaccess(((int)byteaddress) + 2, 0, 1 | 0x10) & 0xFFFF) << (16 * 1));
 	}
 	else if (((cpubussize >> 0) & 0xFF) >= 2) {
 		return i386memaccess(((int)byteaddress) + 0, 0, 1 | 0x20);
 	}
 }
 
-void __fastcall write_byte(UINT32 byteaddress, UINT8 data)
+void write_byte(UINT32 byteaddress, UINT8 data)
 {
-	i386memaccess(((int)byteaddress) + 0, (UINT8)data, 0);
+	i386memaccess(((int)byteaddress) + 0, (UINT8) data, 0);
 }
-void __fastcall write_word(UINT32 byteaddress, UINT16 data)
+void write_word(UINT32 byteaddress, UINT16 data)
 {
 	if (((cpubussize >> 0) & 0xFF) == 0) {
 		i386memaccess(((int)byteaddress) + 0, (UINT8)(data >> (8 * 0)), 0);
@@ -151,7 +154,7 @@ void __fastcall write_word(UINT32 byteaddress, UINT16 data)
 		i386memaccess(((int)byteaddress) + 0, (data >> (16 * 0)), 0 | 0x10);
 	}
 }
-void __fastcall write_dword(UINT32 byteaddress, UINT32 data)
+void write_dword(UINT32 byteaddress, UINT32 data)
 {
 	if (((cpubussize >> 0) & 0xFF) == 0) {
 		i386memaccess(((int)byteaddress) + 0, (UINT8)(data >> (8 * 0)), 0);
@@ -168,11 +171,11 @@ void __fastcall write_dword(UINT32 byteaddress, UINT32 data)
 	}
 }
 
-UINT8 __fastcall read_io_byte(UINT32 byteaddress)
+UINT8 read_io_byte(UINT32 byteaddress)
 {
 	return (i386memaccess(((int)byteaddress) + 0, 0, 3) & 0xFF);
 }
-UINT16 __fastcall read_io_word(UINT32 byteaddress)
+UINT16 read_io_word(UINT32 byteaddress)
 {
 	if (((cpubussize >> 8) & 0xFF) == 0) {
 		return ((i386memaccess(((int)byteaddress) + 0, 0, 3) & 0xFF) << (8 * 0)) | ((i386memaccess(((int)byteaddress) + 1, 0, 3) & 0xFF) << (8 * 1));
@@ -181,24 +184,24 @@ UINT16 __fastcall read_io_word(UINT32 byteaddress)
 		return (i386memaccess(((int)byteaddress) + 0, 0, 3) & 0xFFFF | 0x10);
 	}
 }
-UINT32 __fastcall read_io_dword(UINT32 byteaddress)
+UINT32 read_io_dword(UINT32 byteaddress)
 {
 	if (((cpubussize >> 8) & 0xFF) == 0) {
 		return ((i386memaccess(((int)byteaddress) + 0, 0, 3) & 0xFF) << (8 * 0)) | ((i386memaccess(((int)byteaddress) + 1, 0, 3) & 0xFF) << (8 * 1)) | ((i386memaccess(((int)byteaddress) + 2, 0, 3) & 0xFF) << (8 * 2)) | ((i386memaccess(((int)byteaddress) + 3, 0, 3) & 0xFF) << (8 * 3));
 	}
 	else if (((cpubussize >> 8) & 0xFF) == 1) {
-		return ((i386memaccess(((int)byteaddress) + 0, 0, 3 | 0x10) & 0xFFFF) << (16 * 0)) | ((i386memaccess(((int)byteaddress) + 0, 0, 3 | 0x10) & 0xFFFF) << (16 * 1));
+		return ((i386memaccess(((int)byteaddress) + 0, 0, 3 | 0x10) & 0xFFFF) << (16 * 0))| ((i386memaccess(((int)byteaddress) + 0, 0, 3 | 0x10) & 0xFFFF) << (16 * 1));
 	}
 	else if (((cpubussize >> 8) & 0xFF) >= 2) {
 		return (i386memaccess(((int)byteaddress) + 0, 0, 3 | 0x20) & 0xFFFFFFFF);
 	}
 }
 
-void __fastcall write_io_byte(UINT32 byteaddress, UINT8 data)
+void write_io_byte(UINT32 byteaddress, UINT8 data)
 {
 	i386memaccess(((int)byteaddress) + 0, (UINT8)data, 2);
 }
-void __fastcall write_io_word(UINT32 byteaddress, UINT16 data)
+void write_io_word(UINT32 byteaddress, UINT16 data)
 {
 	if (((cpubussize >> 8) & 0xFF) == 0) {
 		i386memaccess(((int)byteaddress) + 0, (UINT8)(data >> (8 * 0)), 2);
@@ -209,15 +212,14 @@ void __fastcall write_io_word(UINT32 byteaddress, UINT16 data)
 	}
 	//i386memaccess(((int)byteaddress) + 0, (UINT16)data, 2);
 }
-void __fastcall write_io_dword(UINT32 byteaddress, UINT32 data)
+void write_io_dword(UINT32 byteaddress, UINT32 data)
 {
 	if (((cpubussize >> 8) & 0xFF) == 0) {
 		i386memaccess(((int)byteaddress) + 0, (UINT8)(data >> (8 * 0)), 2);
 		i386memaccess(((int)byteaddress) + 1, (UINT8)(data >> (8 * 1)), 2);
 		i386memaccess(((int)byteaddress) + 2, (UINT8)(data >> (8 * 2)), 2);
 		i386memaccess(((int)byteaddress) + 3, (UINT8)(data >> (8 * 3)), 2);
-	}
-	else if (((cpubussize >> 8) & 0xFF) == 1) {
+	}else if (((cpubussize >> 8) & 0xFF) == 1) {
 		i386memaccess(((int)byteaddress) + 0, (UINT16)(data >> 16 * 0), 2 | 0x10);
 		i386memaccess(((int)byteaddress) + 2, (UINT16)(data >> 16 * 2), 2 | 0x10);
 	}
@@ -274,12 +276,12 @@ int cpu_type, cpu_step;
 /* src/emu/didisasm.h */
 
 // Disassembler constants
-const UINT32 DASMFLAG_SUPPORTED = 0x80000000;   // are disassembly flags supported?
-const UINT32 DASMFLAG_STEP_OUT = 0x40000000;   // this instruction should be the end of a step out sequence
-const UINT32 DASMFLAG_STEP_OVER = 0x20000000;   // this instruction should be stepped over by setting a breakpoint afterwards
-const UINT32 DASMFLAG_OVERINSTMASK = 0x18000000;   // number of extra instructions to skip when stepping over
+const UINT32 DASMFLAG_SUPPORTED     = 0x80000000;   // are disassembly flags supported?
+const UINT32 DASMFLAG_STEP_OUT      = 0x40000000;   // this instruction should be the end of a step out sequence
+const UINT32 DASMFLAG_STEP_OVER     = 0x20000000;   // this instruction should be stepped over by setting a breakpoint afterwards
+const UINT32 DASMFLAG_OVERINSTMASK  = 0x18000000;   // number of extra instructions to skip when stepping over
 const UINT32 DASMFLAG_OVERINSTSHIFT = 27;           // bits to shift after masking to get the value
-const UINT32 DASMFLAG_LENGTHMASK = 0x0000ffff;   // the low 16-bits contain the actual length
+const UINT32 DASMFLAG_LENGTHMASK    = 0x0000ffff;   // the low 16-bits contain the actual length
 
 /*****************************************************************************/
 /* src/emu/memory.h */
@@ -301,12 +303,11 @@ typedef UINT32	offs_t;
 
 #undef CPU_DISASSEMBLE
 
-int CPU_DISASSEMBLE(UINT8* oprom, offs_t eip, bool is_ia32, char* buffer, size_t buffer_len)
+int CPU_DISASSEMBLE(UINT8 *oprom, offs_t eip, bool is_ia32, char *buffer, size_t buffer_len)
 {
-	if (is_ia32) {
+	if(is_ia32) {
 		return CPU_DISASSEMBLE_CALL(x86_32) & DASMFLAG_LENGTHMASK;
-	}
-	else {
+	} else {
 		return CPU_DISASSEMBLE_CALL(x86_16) & DASMFLAG_LENGTHMASK;
 	}
 }
@@ -356,7 +357,7 @@ UINT32 CPU_GET_REG(int regid)
 
 void CPU_SET_REG(int regid, UINT32 regdata)
 {
-	CPU_REGS_DWORD(regid) = regdata;
+	CPU_REGS_DWORD(regid)=regdata;
 }
 
 UINT32 CPU_GET_SYSREG(int regid)
@@ -543,40 +544,36 @@ inline void CPU_SET_EIP(UINT32 value)
 
 inline void CPU_SET_C_FLAG(UINT8 value)
 {
-	if (value) {
-		CPU_FLAG |= C_FLAG;
-	}
-	else {
+	if(value) {
+		CPU_FLAG |=  C_FLAG;
+	} else {
 		CPU_FLAG &= ~C_FLAG;
 	}
 }
 
 inline void CPU_SET_Z_FLAG(UINT8 value)
 {
-	if (value) {
-		CPU_FLAG |= Z_FLAG;
-	}
-	else {
+	if(value) {
+		CPU_FLAG |=  Z_FLAG;
+	} else {
 		CPU_FLAG &= ~Z_FLAG;
 	}
 }
 
 inline void CPU_SET_S_FLAG(UINT8 value)
 {
-	if (value) {
-		CPU_FLAG |= S_FLAG;
-	}
-	else {
+	if(value) {
+		CPU_FLAG |=  S_FLAG;
+	} else {
 		CPU_FLAG &= ~S_FLAG;
 	}
 }
 
 inline void CPU_SET_I_FLAG(UINT8 value)
 {
-	if (value) {
-		CPU_FLAG |= I_FLAG;
-	}
-	else {
+	if(value) {
+		CPU_FLAG |=  I_FLAG;
+	} else {
 		CPU_FLAG &= ~I_FLAG;
 	}
 }
@@ -589,24 +586,22 @@ inline void CPU_SET_IOP_FLAG(UINT8 value)
 
 inline void CPU_SET_NT_FLAG(UINT8 value)
 {
-	if (value) {
-		CPU_FLAG |= NT_FLAG;
-	}
-	else {
+	if(value) {
+		CPU_FLAG |=  NT_FLAG;
+	} else {
 		CPU_FLAG &= ~NT_FLAG;
 	}
 }
 
 inline void CPU_SET_VM_FLAG(UINT8 value)
 {
-	if (value) {
-		if (!(CPU_EFLAG & VM_FLAG)) {
-			CPU_EFLAG |= VM_FLAG;
+	if(value) {
+		if(!(CPU_EFLAG & VM_FLAG)) {
+			CPU_EFLAG |=  VM_FLAG;
 			change_vm(1);
 		}
-	}
-	else {
-		if (CPU_EFLAG & VM_FLAG) {
+	} else {
+		if(CPU_EFLAG & VM_FLAG) {
 			CPU_EFLAG &= ~VM_FLAG;
 			change_vm(0);
 		}
@@ -619,11 +614,10 @@ inline void CPU_SET_CR0(UINT32 src)
 	UINT32 reg = CPU_CR0;
 	src &= CPU_CR0_ALL;
 #if defined(USE_FPU)
-	if (i386cpuid.cpu_feature & CPU_FEATURE_FPU) {
+	if(i386cpuid.cpu_feature & CPU_FEATURE_FPU){
 		src |= CPU_CR0_ET;	/* FPU present */
 		//src &= ~CPU_CR0_EM;
-	}
-	else {
+	} else {
 		src |= CPU_CR0_EM | CPU_CR0_NE;
 		src &= ~(CPU_CR0_MP | CPU_CR0_ET);
 	}
@@ -633,7 +627,7 @@ inline void CPU_SET_CR0(UINT32 src)
 #endif
 	CPU_CR0 = src;
 
-	if ((reg ^ CPU_CR0) & (CPU_CR0_PE | CPU_CR0_PG)) {
+	if ((reg ^ CPU_CR0) & (CPU_CR0_PE|CPU_CR0_PG)) {
 		tlb_flush_all();
 	}
 	if ((reg ^ CPU_CR0) & CPU_CR0_PE) {
@@ -644,8 +638,7 @@ inline void CPU_SET_CR0(UINT32 src)
 	if ((reg ^ CPU_CR0) & CPU_CR0_PG) {
 		if (CPU_CR0 & CPU_CR0_PG) {
 			change_pg(1);
-		}
-		else {
+		} else {
 			change_pg(0);
 		}
 	}
@@ -674,18 +667,17 @@ inline void CPU_SET_EFLAG(UINT32 new_flags)
 	UINT32 orig = CPU_EFLAG;
 
 	new_flags &= ALL_EFLAG;
-	//	mask &= ALL_EFLAG;
-	//	CPU_EFLAG = (REAL_EFLAGREG & ~mask) | (new_flags & mask);
+//	mask &= ALL_EFLAG;
+//	CPU_EFLAG = (REAL_EFLAGREG & ~mask) | (new_flags & mask);
 	CPU_EFLAG = new_flags;
 
 	CPU_OV = CPU_FLAG & O_FLAG;
-	CPU_TRAP = (CPU_FLAG & (I_FLAG | T_FLAG)) == (I_FLAG | T_FLAG);
+	CPU_TRAP = (CPU_FLAG & (I_FLAG|T_FLAG)) == (I_FLAG|T_FLAG);
 	if (CPU_STAT_PM) {
 		if ((orig ^ CPU_EFLAG) & VM_FLAG) {
 			if (CPU_EFLAG & VM_FLAG) {
 				change_vm(1);
-			}
-			else {
+			} else {
 				change_vm(0);
 			}
 		}
@@ -714,7 +706,7 @@ void CPU_INIT()
 {
 	CPU_INITIALIZE();
 	CPU_ADRSMASK = ~0;
-	//	CPU_ADRSMASK = ~(1 << 20);
+//	CPU_ADRSMASK = ~(1 << 20);
 	irq_pending = false;
 }
 
@@ -731,7 +723,7 @@ void CPU_FINISH()
 void CPU_RESET()
 {
 	// from pccore_reset(void) in pccore.c
-
+	
 	// enable all features
 	i386cpuid.cpu_family = CPU_FAMILY;
 	i386cpuid.cpu_model = CPU_MODEL;
@@ -745,12 +737,12 @@ void CPU_RESET()
 	strcpy(i386cpuid.cpu_brandstring, CPU_BRAND_STRING_NEKOPRO2);
 
 	i386cpuid.fpu_type = FPU_TYPE_SOFTFLOAT;
-	//	i386cpuid.fpu_type = FPU_TYPE_DOSBOX;
-	//	i386cpuid.fpu_type = FPU_TYPE_DOSBOX2;
+//	i386cpuid.fpu_type = FPU_TYPE_DOSBOX;
+//	i386cpuid.fpu_type = FPU_TYPE_DOSBOX2;
 	fpu_initialize();
 
 	UINT32 PREV_CPU_ADRSMASK = CPU_ADRSMASK;
-	//	CPU_RESET();
+//	CPU_RESET();
 	ia32reset();
 	CPU_TYPE = 0;
 	CS_BASE = 0xf0000;
@@ -765,22 +757,21 @@ UINT32 CPU_GET_NEXT_PC();
 int CPU_EXECUTE()
 {
 #ifdef USE_DEBUGGER
-	if (now_debugging) {
-		if (force_suspend) {
+	if(now_debugging) {
+		if(force_suspend) {
 			force_suspend = false;
 			now_suspended = true;
-		}
-		else {
+		} else {
 			UINT32 next_pc = CPU_GET_NEXT_PC();
-			for (int i = 0; i < MAX_BREAK_POINTS; i++) {
-				if (break_point.table[i].status == 1 && break_point.table[i].addr == next_pc) {
+			for(int i = 0; i < MAX_BREAK_POINTS; i++) {
+				if(break_point.table[i].status == 1 && break_point.table[i].addr == next_pc) {
 					break_point.hit = i + 1;
 					now_suspended = true;
 					break;
 				}
 			}
 		}
-		while (now_debugging && now_suspended) {
+		while(now_debugging && now_suspended) {
 			Sleep(10);
 		}
 	}
@@ -788,21 +779,20 @@ int CPU_EXECUTE()
 
 	CPU_REMCLOCK = CPU_BASECLOCK = 1;
 	CPU_EXEC();
-	if (nmi_pending) {
+	if(nmi_pending) {
 		CPU_INTERRUPT(2, 0);
 		nmi_pending = false;
+	} else
+	if(irq_pending && CPU_isEI) {
+		CPU_INTERRUPT(pic_ack_vector, 0);
+		irq_pending = false;
+		//pic_update();
 	}
-	else
-		if (irq_pending && CPU_isEI) {
-			CPU_INTERRUPT(pic_ack_vector, 0);
-			irq_pending = false;
-			//pic_update();
-		}
-	//	return CPU_BASECLOCK - CPU_REMCLOCK;
+//	return CPU_BASECLOCK - CPU_REMCLOCK;
 
 #ifdef USE_DEBUGGER
-	if (now_debugging) {
-		if (!now_going) {
+	if(now_debugging) {
+		if(!now_going) {
 			now_suspended = true;
 		}
 	}
@@ -819,19 +809,18 @@ int CPU_EXECUTE_CC(int clockcount)
 	CPU_REMCLOCK = clockcount;
 	CPU_BASECLOCK = 0;
 	CPU_EXEC();
-	if (nmi_pending) {
-		CPU_INTERRUPT(2, 0);
-		nmi_pending = false;
+		if(nmi_pending) {
+			CPU_INTERRUPT(2, 0);
+			nmi_pending = false;
+		} else
+	if (irq_pending && CPU_isEI) {
+		CPU_INTERRUPT(pic_ack_vector, 0);
+		irq_pending = false;
+		//pic_update();
 	}
-	else
-		if (irq_pending && CPU_isEI) {
-			CPU_INTERRUPT(pic_ack_vector, 0);
-			irq_pending = false;
-			//pic_update();
-		}
 	//	return CPU_BASECLOCK - CPU_REMCLOCK;
 
-	return CPU_BASECLOCK - CPU_REMCLOCK;
+		return CPU_BASECLOCK - CPU_REMCLOCK;
 #endif
 }
 
@@ -854,8 +843,7 @@ void CPU_JMP_FAR(UINT16 new_cs, UINT32 new_ip)
 		}
 		LOAD_SEGREG(CPU_CS_INDEX, new_cs);
 		CPU_EIP = new_ip;
-	}
-	else {
+	} else {
 		/* Protected mode */
 		JMPfar_pm(new_cs, new_ip);
 	}
@@ -880,8 +868,7 @@ void CPU_CALL_FAR(UINT16 new_cs, UINT32 new_ip)
 		LOAD_SEGREG(CPU_CS_INDEX, new_cs);
 		CPU_EIP = new_ip;
 		CPU_CLEAR_PREV_ESP();
-	}
-	else {
+	} else {
 		/* Protected mode */
 		CALLfar_pm(new_cs, new_ip);
 	}
@@ -902,8 +889,7 @@ void CPU_PUSH(UINT16 reg)
 		UINT16 __new_sp = CPU_SP - 2;
 		cpu_vmemorywrite_w(CPU_SS_INDEX, __new_sp, reg);
 		CPU_SP = __new_sp;
-	}
-	else {
+	} else {
 		UINT32 __new_esp = CPU_ESP - 2;
 		cpu_vmemorywrite_w(CPU_SS_INDEX, __new_esp, reg);
 		CPU_ESP = __new_esp;
@@ -917,8 +903,7 @@ UINT16 CPU_POP()
 	if (!CPU_STAT_SS32) {
 		reg = cpu_vmemoryread_w(CPU_SS_INDEX, CPU_SP);
 		CPU_SP += 2;
-	}
-	else {
+	} else {
 		reg = cpu_vmemoryread_w(CPU_SS_INDEX, CPU_ESP);
 		CPU_ESP += 2;
 	}
@@ -936,11 +921,10 @@ UINT16 CPU_READ_STACK()
 
 	if (!CPU_STAT_SS32) {
 		reg = cpu_vmemoryread_w(CPU_SS_INDEX, CPU_SP);
-		//		CPU_SP += 2;
-	}
-	else {
+//		CPU_SP += 2;
+	} else {
 		reg = cpu_vmemoryread_w(CPU_SS_INDEX, CPU_ESP);
-		//		CPU_ESP += 2;
+//		CPU_ESP += 2;
 	}
 	return reg;
 }
@@ -950,12 +934,11 @@ void CPU_WRITE_STACK(UINT16 reg)
 	if (!CPU_STAT_SS32) {
 		UINT16 __new_sp = CPU_SP - 2;
 		cpu_vmemorywrite_w(CPU_SS_INDEX, __new_sp, reg);
-		//		CPU_SP = __new_sp;
-	}
-	else {
+//		CPU_SP = __new_sp;
+	} else {
 		UINT32 __new_esp = CPU_ESP - 2;
 		cpu_vmemorywrite_w(CPU_SS_INDEX, __new_esp, reg);
-		//		CPU_ESP = __new_esp;
+//		CPU_ESP = __new_esp;
 	}
 }
 
@@ -971,7 +954,7 @@ void CPU_LOAD_TR(UINT16 selector)
 
 UINT32 CPU_TRANS_PAGING_ADDR(UINT32 addr)
 {
-	if (CPU_STAT_PM && CPU_STAT_PAGING) {
+	if(CPU_STAT_PM && CPU_STAT_PAGING) {
 		UINT32 pde_addr = CPU_STAT_PDE_BASE + ((addr >> 20) & 0xffc);
 		UINT32 pde = read_dword(pde_addr & CPU_ADRSMASK);
 		/* XXX: check */
@@ -1023,9 +1006,9 @@ void CPU_SET_IRQ(BOOL statforirq)
 #ifdef USE_DEBUGGER
 UINT32 CPU_TRANS_CODE_ADDR(UINT32 seg, UINT32 ofs)
 {
-	if (CPU_STAT_PM && !CPU_STAT_VM86) {
+	if(CPU_STAT_PM && !CPU_STAT_VM86) {
 		UINT32 seg_base = 0;
-		if (seg) {
+		if(seg) {
 			UINT32 base = (seg & 4) ? CPU_LDTR_BASE : CPU_GDTR_BASE;
 			UINT32 v1 = read_dword(CPU_TRANS_PAGING_ADDR(base + (seg & ~7) + 0) & CPU_ADRSMASK);
 			UINT32 v2 = read_dword(CPU_TRANS_PAGING_ADDR(base + (seg & ~7) + 4) & CPU_ADRSMASK);
@@ -1050,7 +1033,7 @@ UINT32 CPU_GET_NEXT_PC()
 VC_DLL_EXPORTS int CPU_GET_REGPTR(int reglno);
 
 int CPU_GET_REGPTR(int reglno) {
-	switch (reglno) {
+	switch(reglno){
 	case 0:
 		return (int)(&(CPU_STATSAVE.cpu_regs.reg));
 		break;
@@ -1069,288 +1052,11 @@ int CPU_GET_REGPTR(int reglno) {
 	case 5:
 		return (int)(&(i386core));
 		break;
-	case 6:
-		return (int)(&(i386cpuid));
-		break;
-	case 7:
-		return (int)(&(i386msr));
-		break;
 	}
 }
 
 
 VC_DLL_EXPORTS void CPU_EXECUTE_INFINITY(void);
 void CPU_EXECUTE_INFINITY(void) { while (true) { CPU_EXECUTE(); } }
-
-
-typedef DWORD __fastcall func(DWORD*);
-
-DWORD GetHookAddress(char* Dll, char* FuncName)
-{
-	char DllPath[1024];
-	char Buff[1024];
-	strcpy(DllPath, PeLdrGetSystemDirectoryA());
-	int tmp = strlen(DllPath);
-	strcpy(DllPath + tmp - 2, "NT\\");
-	strcat(DllPath, Dll);
-	if ((DWORD)FuncName > 65545)
-	{
-#ifdef _ARM_
-		sprintf(Buff, "yact_%s", FuncName);
-#else
-		sprintf(Buff, "@yact_%s@4", FuncName);
-#endif
-	}
-	else
-	{
-#ifdef _ARM_
-		sprintf(Buff, "yact_Ord%", (int)FuncName);
-#else
-		sprintf(Buff, "@yact_Ord%d4", (int)FuncName);
-#endif
-	}
-	HMODULE H = LoadLibraryA(DllPath);
-	if (H == 0)
-	{
-#ifdef _DEBUG
-		printf("Error %d loading '%s'\n", GetLastError(), Dll);
-#endif
-		LogErr("Error %d loading '%s'\n", GetLastError(), Dll);
-	}
-#ifdef _DEBUG
-	LogPrint("Binding %s from %s\n", Buff, Dll);
-#endif
-	DWORD R = (DWORD)GetProcAddress(H, Buff);
-	return R;
-}
-
-unsigned int ProcessCallback(unsigned int reg_eax, unsigned int reg_eip)
-{
-	DWORD* Param = (DWORD*)reg_eax;
-	DWORD Func = *(DWORD*)(reg_eip - 4);
-	DWORD Functemp = 0;
-
-	if ((0x80000000 & Func) == 0)
-	{
-		Functemp = (DWORD)GetHookAddress(((char**)Func)[0], ((char**)Func)[1]);
-		Func = 0x80000000 | Functemp;//(DWORD)GetHookAddress(((char**)Func)[0],((char**)Func)[1]);
-#if 1 //def _DEBUG
-		if (0x80000000 == Func)
-		{
-			Func = *(DWORD*)(reg_eip - 4);
-			char* Dll = ((char**)Func)[0];
-			char* Name = ((char**)Func)[1];
-#ifdef _DEBUG
-			printf("Func %s not found in %s\n", Name, Dll);
-#endif
-			LogErr("Func %s not found in %s\n", Name, Dll);
-			exit(0);
-		}
-#endif
-		//* (UINT8*)(reg_eip - 5) = (Functemp & 0x80000000) ? 1 : 0;
-		*(DWORD*)(reg_eip - 4) = Func;
-	}
-
-	int tmp = 0;
-
-	if (0x80000000 == Func)
-#ifndef _DEBUG
-		goto Skip;
-#else
-		exit(0);
-#endif
-	//int tmp = 0;
-	__try {
-		//tmp = ((func*)(((*(UINT8*)(reg_eip - 5)) ? 0x80000000 : 0) | (0x7fffffff & Func)))(Param);
-		tmp = ((func*)(0x7fffffff & Func))(Param);
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
-	{
-#ifdef _DEBUG
-		LogInfo("Exception in callback!");
-#endif
-	}
-Skip:
-	reg_eax = tmp;
-	return reg_eax;
-}
-
-
-CList StackList;
-
-char* memdirectaccess;
-
-char descptx4tmp[4096];
-
-UINT32 peldrexecaccess(int prm_0, int prm_1, int prm_2) {
-	switch (prm_2&0xF) {
-	case 0:
-		if (prm_0 < 4096) { descptx4tmp[prm_0] = prm_1; return 0; }
-		/*printf("%08X\n", prm_0);
-		printf("%08X\n", CPU_EIP);*/
-		memdirectaccess[prm_0] = prm_1;
-		return 0;
-		break;
-	case 1:
-		if (prm_0 < 4096) { return descptx4tmp[prm_0]; }
-		/*printf("%08X\n", prm_0);
-		printf("%08X\n", CPU_EIP);*/
-		return memdirectaccess[prm_0];
-		break;
-	case 3:
-		if (prm_0 == 0xe5) { LogInfo("%08X", CPU_EAX); return ProcessCallback(CPU_EAX, CPU_EIP - 2); }
-		break;
-	}
-	return 0;
-}
-
-
-void* AllocStack(int Size)
-{
-	DWORD Tmp;
-	void* Ptr = VirtualAlloc(0, Size, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-	if (Ptr == 0)
-		return 0;
-
-#ifdef _DEBUG
-	memset(Ptr, 0xbe, Size);
-	VirtualProtect(Ptr, PeLdrGetPageSize(), PAGE_READWRITE | PAGE_GUARD, &Tmp);
-#endif
-	return Ptr;
-}
-
-void FreeStack(void* Ptr)
-{
-	VirtualFree(Ptr, 0, MEM_RELEASE);
-}
-
-void ReuseStack(void* Ptr)
-{
-	StackList.AddHead(Ptr);
-}
-
-
-// Initialize engine. Return true == success.
-EMU_EXPORT BOOL EmuInitialize(void)
-{
-	CPU_INIT();
-	CPU_RESET();
-	cpubussize = 0x0200;
-	i386memaccess = peldrexecaccess;
-	return TRUE;
-}
-
-// Emulate code starting from Addr, passing NParams on stack (like stdcall/cdecl)
-EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams, ...)
-{
-		CPU_SET_SYSREG(1, 0);
-		CPU_SET_REG(31, 0x400);
-		CPU_SWITCH_PM(1);
-
-		for (int cnt = 0; cnt < 3; cnt++) { CPU_SET_REG(8 + cnt, 0x00080008); }
-		for (int cnt = 0; cnt < 6;cnt++){ CPU_SET_SYSREG(cnt, 0); CPU_SET_SYSREG_DESC(cnt, 0); CPU_SET_SYSREG_LIMIT(cnt, -1); }
-
-		CPU_SET_REG(32, 0x417);
-
-		CPU_SET_REG(0, 640);
-
-		CPU_SET_SYSREG_DESC(14, 1);
-		CPU_SET_SYSREG_DESC(16, 1);
-		CPU_SET_SS32(true);
-		CPU_SET_OP32(true);
-		CPU_SET_AS32(true);
-
-		CPU_SET_IDTR_LIMIT(0);
-		CPU_SET_GDTR_LIMIT(0);
-
-		CPU_SET_IDTR_BASE(0xFFFFF100);
-		CPU_SET_GDTR_BASE(0xFFFFF100);
-
-		//CPU_SET_SYSREG_LIMIT(1,(-1));
-		//CPU_SET_SYSREG(1,(0xFFFFF000));
-	void* Stack = StackList.GetHead();
-	if (Stack == 0)
-		Stack = AllocStack(EMU_STACK_SIZE);
-	CPU_ESP = EMU_STACK_SIZE - 128 + (DWORD)Stack;
-	CPU_EIP = (DWORD)Addr;
-	va_list args;
-	va_start(args, NParams);
-	for (int i = 0; i < NParams; i++)
-		((DWORD*)CPU_ESP)[i + 1] = va_arg(args, int);
-	*(DWORD*)CPU_ESP = CbReturnToHost();
-	DWORD* TEB = (DWORD*)PeLdrGetCurrentTeb();
-	TEB[1] = CPU_ESP;	// Fill stack top and size for Borland
-	TEB[2] = EMU_STACK_SIZE;
-	while(true){
-		//CPU_EXECUTE();
-		CPU_REMCLOCK = CPU_BASECLOCK = 0x7FFFFFFF;
-#ifdef __cplusplus
-		try {
-#else
-		switch (sigsetjmp(exec_1step_jmpbuf, 1)) {
-		case 0:
-			break;
-
-		case 1:
-			VERBOSE(("ia32: return from exception"));
-			break;
-
-		case 2:
-			VERBOSE(("ia32: return from panic"));
-			break;
-			//return;
-
-		default:
-			VERBOSE(("ia32: return from unknown cause"));
-			break;
-		}
-#endif
-			do {
-				if (CbIsReturnToHost(CPU_EIP)) { break; }
-				exec_1step();
-				if (CPU_TRAP) {
-					CPU_DR6 |= CPU_DR6_BS;
-					INTERRUPT(1, INTR_TYPE_EXCEPTION);
-				}
-				//dmax86();
-			} while (CPU_REMCLOCK > 0);
-#ifdef __cplusplus
-		}
-	catch (int e) {
-		switch (e) {
-		case 0:
-			break;
-
-		case 1:
-			VERBOSE(("ia32: return from exception"));
-			break;
-
-		case 2:
-			VERBOSE(("ia32: return from panic"));
-			break;
-			//return CPU_EAX;
-
-		default:
-			VERBOSE(("ia32: return from unknown cause"));
-			break;
-		}
-	}
-#endif
-		if (CbIsReturnToHost(CPU_EIP)) { break; }
-		//CPU_EXEC();
-	}
-	CbRemoveCallAtThreadExit(ReuseStack, Stack);
-	ReuseStack(Stack);
-	return CPU_EAX;
-	x86opcode *Op=new x86opcode;
-	Op->CurrentPtr=(BYTE*)Addr;
-
-	do
-		InitCommand(Op);
-	while(ProcessCommand(Op));
-
-	delete Op;
-	return 0;
-}
 
 
