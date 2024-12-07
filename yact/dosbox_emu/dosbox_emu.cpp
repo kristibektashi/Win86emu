@@ -398,6 +398,7 @@ Bitu IO_ReadD(Bitu port) {
 #endif
 		}
 Skip:
+		reg_eax=tmp;
 //		L.Lock();
 		// Segs.phys[4]=GetFSBase();			// for dyngen 
 		// cpu=old_cpu;
