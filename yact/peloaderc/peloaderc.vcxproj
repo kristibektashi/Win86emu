@@ -22,6 +22,7 @@
     <ProjectGuid>{0105311B-DBBF-4C39-9CE2-388FA8D069EA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>peloaderc</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

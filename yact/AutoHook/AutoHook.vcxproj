@@ -22,6 +22,7 @@
     <ProjectGuid>{469AB837-E75C-4A0E-B75C-55AEF3CC3750}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>AutoHook</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
