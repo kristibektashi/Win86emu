@@ -23,6 +23,7 @@
     <RootNamespace>ntdll_yact</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>ntdll.nt</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

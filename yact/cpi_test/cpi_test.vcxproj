@@ -22,6 +22,7 @@
     <ProjectGuid>{83CBF196-FAAF-4852-9B7C-EC13918FBD0A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cpi_test</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -22,6 +22,7 @@
     <ProjectGuid>{BC923A4F-7A44-4466-BB58-1B33A9F151B1}</ProjectGuid>
     <RootNamespace>bochs_emu</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
