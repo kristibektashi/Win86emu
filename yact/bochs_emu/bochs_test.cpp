@@ -160,17 +160,25 @@ DWORD GetHookAddress(char* Dll, char*FuncName)
 	strcat(DllPath,Dll);
 	if((DWORD)FuncName>65545)
 	{
+#ifdef _WIN64
+		sprintf(Buff, "yact_%s", FuncName);
+#else
 #ifdef _ARM_
 		sprintf(Buff,"yact_%s",FuncName);
 #else
 		sprintf(Buff,"@yact_%s@4",FuncName);
 #endif
+#endif
 	} else
 	{
+#ifdef _WIN64
+		sprintf(Buff, "yact_Ord%", (int)FuncName);
+#else
 #ifdef _ARM_
 		sprintf(Buff,"yact_Ord%",(int)FuncName);
 #else
 		sprintf(Buff,"@yact_Ord%d4",(int)FuncName);
+#endif
 #endif
 	}
 	HMODULE H=LoadLibraryA(DllPath);
@@ -598,6 +606,41 @@ unsigned int GetFsBase()
 	return (DWORD)PeLdrGetCurrentTeb();
 }
 
+UINT8 armsvcvecbase[] = { 0x04 ,0xE0 ,0x2D ,0xE5 ,0x20 ,0x70 ,0x9F ,0xE5 ,0x20 ,0x00 ,0x9F ,0xE5 ,0x20 ,0x10 ,0x9F ,0xE5 ,0x20 ,0x20 ,0x9F ,0xE5 ,0x20 ,0x30 ,0x9F ,0xE5 ,0x20 ,0x40 ,0x9F ,0xE5 ,0x20 ,0x50 ,0x9F ,0xE5 ,0x20 ,0x60 ,0x9F ,0xE5 ,0x00 ,0x00 ,0x00 ,0xEF ,0x04 ,0xF0 ,0x9D ,0xE4 ,0x44 ,0x33 ,0x22 ,0x11 ,0x88 ,0x77 ,0x66 ,0x55 ,0x88 ,0x77 ,0x66 ,0x55 ,0x88 ,0x77 ,0x66 ,0x55 ,0x88 ,0x77 ,0x66 ,0x55 ,0x88 ,0x77 ,0x66 ,0x55 ,0x88 ,0x77 ,0x66 ,0x55 };
+UINT8* armsvcvector;
+typedef DWORD typeofarmsvcvectorx();
+
+DWORD syscall_host_linux(int Svcid,int prm_0, int prm_1, int prm_2, int prm_3, int prm_4, int prm_5) {
+#ifdef _ARM_
+	if (armsvcvector == nullptr) {
+		armsvcvector = (UINT8*)VirtualAlloc(NULL, 4096, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+		memcpy_s(armsvcvector, sizeof(armsvcvecbase), armsvcvecbase, sizeof(armsvcvecbase));
+	}
+	DWORD *svctmp = (DWORD*)(&armsvcvector + 0x2C);
+	svctmp[0] = Svcid;
+	svctmp[1] = prm_0;
+	svctmp[2] = prm_1;
+	svctmp[3] = prm_2;
+	svctmp[4] = prm_3;
+	svctmp[5] = prm_4;
+	svctmp[6] = prm_5;
+	svctmp[7] = 0;
+	return ((typeofarmsvcvectorx*)(&armsvcvector))();
+#else
+	_asm {
+		mov eax,[Svcid]
+		mov ebx,[prm_0]
+		mov ecx,[prm_1]
+		mov edx,[prm_2]
+		mov esi,[prm_3]
+		mov edi,[prm_4]
+		mov ebp,[prm_5]
+		int 80h
+		ret 0x1C
+	}
+#endif
+}
+
 EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)
 {
 	static int id=0;
@@ -695,8 +738,30 @@ EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)
 			  BX_CPU(0)->gen_reg[BX_32BIT_REG_ESP].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EBP].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_ESI].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EDI].dword.erx);
 		printf(" EIP=%08x (%08x)\n", BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx,
 			(unsigned) BX_CPU(0)->prev_rip);		*/
-		BX_CPU(0)->activity_state=0;
+#if 1
+		if ((*(UINT8*)(BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx)) == 0xcd) {
+			UINT8 vector4svc = (*(UINT8*)((BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx) + 1));
+			BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx += 2;
+			switch (vector4svc) {
+			case 0x80:
+				BX_CPU(0)->gen_reg[BX_32BIT_REG_EAX].dword.erx = syscall_host_linux(BX_CPU(0)->gen_reg[BX_32BIT_REG_EAX].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EBX].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_ECX].dword.erx,BX_CPU(0)->gen_reg[BX_32BIT_REG_EDX].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_ESI].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EDI].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EBP].dword.erx);
+				break;
+			default:
+				break;
+			}
+			BX_CPU(0)->prev_rip = BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx;
+		}
+		else {
+			BX_CPU(0)->activity_state = 0;
+			BX_CPU(0)->cpu_loop(1);
+			//ExceptExec(BX_CPU(0));
+		}
+#else
+		BX_CPU(0)->activity_state = 0;
 		ExceptExec(BX_CPU(0));
+#endif
+		/*BX_CPU(0)->activity_state = 0;
+		ExceptExec(BX_CPU(0));*/
 		if (bx_pc_system.kill_bochs_request)
 			break;
 		if(CbIsReturnToHost(BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx))
