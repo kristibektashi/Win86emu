@@ -76,8 +76,8 @@ DEFINE_FUNC1(DeleteEnhMetaFile)
 DEFINE_FUNC1(DeleteMetaFile)
 DEFINE_FUNC1(DeleteObject)
 DEFINE_FUNC4(DescribePixelFormat)
-DEFINE_FUNC6(DeviceCapabilitiesExA)
-DEFINE_FUNC6(DeviceCapabilitiesExW)
+/*DEFINE_FUNC6(DeviceCapabilitiesExA)
+DEFINE_FUNC6(DeviceCapabilitiesExW)*/
 DEFINE_FUNC4(DrawEscape)
 DEFINE_FUNC5(Ellipse)
 DEFINE_FUNC1(EndDoc)
@@ -347,3 +347,9 @@ DEFINE_FUNC4(UpdateICMRegKeyW)
 DEFINE_FUNC1(WidenPath)
 DEFINE_FUNC6(gdiPlaySpoolStream)
 DEFINE_FUNC2(SetLayout)
+
+/*EXTERN_C DW STUB_EXPORT yact_namesx(DW* R)
+{
+	LEAVE(0);
+	return 0;
+}*/

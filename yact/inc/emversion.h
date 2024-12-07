@@ -5,4 +5,4 @@
 #else
 #define EM_STRING "beta"
 #endif
-#define EM_BUILD 373  
+#define EM_BUILD 377  

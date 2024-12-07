@@ -596,9 +596,11 @@ void BX_CPU_C::set_cpuid_defaults(void)
     BX_INFO(("CPUID[0x0000000D]: %08x %08x %08x %08x", cpuid->eax, cpuid->ebx, cpuid->ecx, cpuid->edx));
   }
 
+#if 0
   // do not report Pentium 4 extended functions if not needed
-  if (! BX_CPU_SUPPORT_ISA_EXTENSION(BX_CPU_SSE2))
+  if (!BX_CPU_SUPPORT_ISA_EXTENSION(BX_CPU_SSE2))
     return;
+#endif
 
   // ------------------------------------------------------
   // CPUID function 0x80000000

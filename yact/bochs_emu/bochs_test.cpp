@@ -399,6 +399,8 @@ EMU_EXPORT BOOL EmuInitialize(void)
 	bx_init_siminterface();
 	bx_init_options();
 
+	SIM->get_param_string(BXPN_BRAND_STRING)->set("VirtualApple @ 2.50GHz");
+
 	SIM->set_init_done(1);
 
 	set_new_handler(newhandler);
