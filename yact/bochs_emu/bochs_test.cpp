@@ -412,6 +412,7 @@ EMU_EXPORT BOOL EmuInitialize(void)
 	bx_init_options();
 
 	SIM->get_param_string(BXPN_BRAND_STRING)->set("VirtualApple @ 2.50GHz");
+	//SIM->get_param_string(BXPN_BRAND_STRING)->set("DG1002FGF84HT");
 
 	SIM->set_init_done(1);
 
@@ -738,7 +739,7 @@ EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)
 			  BX_CPU(0)->gen_reg[BX_32BIT_REG_ESP].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EBP].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_ESI].dword.erx, BX_CPU(0)->gen_reg[BX_32BIT_REG_EDI].dword.erx);
 		printf(" EIP=%08x (%08x)\n", BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx,
 			(unsigned) BX_CPU(0)->prev_rip);		*/
-#if 1
+#if 0
 		if ((*(UINT8*)(BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx)) == 0xcd) {
 			UINT8 vector4svc = (*(UINT8*)((BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx) + 1));
 			BX_CPU(0)->gen_reg[BX_32BIT_REG_EIP].dword.erx += 2;

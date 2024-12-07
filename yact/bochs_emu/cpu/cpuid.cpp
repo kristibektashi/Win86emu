@@ -108,6 +108,12 @@ Bit32u BX_CPU_C::get_cpu_version_information(void)
 
 #if BX_SUPPORT_X86_64
     model    = 2;       // Hammer returns what?
+    if (sse_enabled >= 6 && (SIM->get_param_bool(BXPN_CPUID_AES)->get())) {
+        extended_model = 0x2;
+        model = 0xc;
+        family = 0x6;
+        stepping = 0;
+    }
 #endif
 
   }

@@ -108,7 +108,7 @@
 #define BX_CPU_LEVEL 6//5			// be compatible with no SSE in DosBox core!
 
 // emulate x86-64 instruction set?
-#define BX_SUPPORT_X86_64 0
+#define BX_SUPPORT_X86_64 1
 
 // emulate long physical address (>32 bit)
 #define BX_PHY_ADDRESS_LONG 0
