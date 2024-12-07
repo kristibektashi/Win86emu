@@ -39,6 +39,10 @@ DEFINE_COMFUNC9(IE, DWebBrowserEvents2Vtbl, Invoke);
 
 DEFINE_GUID(DIID_DWebBrowserEvents2_, 0x8856f961,0x340a,0x11d0,0xa9,0x6b,0x00,0xc0,0x4f,0xd7,0x05,0xa2);
 
+IID IID_IEventHandler = {
+	0x4c7f4354, 0x8a07, 0x4d51, {0xb9, 0xf0, 0x47, 0xba, 0x5c, 0xbe, 0xfe, 0xd7}
+};
+
 EXTERN_C DW STUB_EXPORT yact_CoCreateInstanceNT(DW *R)
 {
 	DW Ret=REGDB_E_CLASSNOTREG;
@@ -66,7 +70,7 @@ EXTERN_C DW STUB_EXPORT yact_CoCreateInstanceNT(DW *R)
 			DEFINE_CALLBACK2(AC,IAutoComplete2Vtbl,GetOptions);
 		}
 		return Ret;
-	} else {
+	} else if (riid == IID_IDispatch) {
 		Ret = CoCreateInstance(
 			rclsid,
 			pUnkOuter,
@@ -81,6 +85,150 @@ EXTERN_C DW STUB_EXPORT yact_CoCreateInstanceNT(DW *R)
 		}
 		else { Ret = REGDB_E_CLASSNOTREG; }
 		//return Ret;
+	}
+	else if (riid == IID_IOleObject) {
+		Ret = CoCreateInstance(
+			rclsid,
+			pUnkOuter,
+			dwClsContext,
+			riid,
+			ppv);
+		if (Ret == S_OK)
+		{
+			ICallbackOleObject<IOleObjectVtbl>* defaultobj = new ICallbackOleObject<IOleObjectVtbl>(*ppv);
+			*ppv = defaultobj;
+			return Ret;
+		}
+		else { Ret = REGDB_E_CLASSNOTREG; }
+		//return Ret;
+	}
+	else if (riid == IID_IAdviseSink) {
+		Ret = CoCreateInstance(
+			rclsid,
+			pUnkOuter,
+			dwClsContext,
+			riid,
+			ppv);
+		if (Ret == S_OK)
+		{
+			ICallbackAdviseSink<IAdviseSinkVtbl>* defaultobj = new ICallbackAdviseSink<IAdviseSinkVtbl>(*ppv);
+			*ppv = defaultobj;
+			return Ret;
+		}
+		else { Ret = REGDB_E_CLASSNOTREG; }
+		//return Ret;
+	}
+	else if (riid == IID_IDataObject) {
+		Ret = CoCreateInstance(
+			rclsid,
+			pUnkOuter,
+			dwClsContext,
+			riid,
+			ppv);
+		if (Ret == S_OK)
+		{
+			ICallbackDataObject<IDataObjectVtbl>* defaultobj = new ICallbackDataObject<IDataObjectVtbl>(*ppv);
+			*ppv = defaultobj;
+			return Ret;
+		}
+		else { Ret = REGDB_E_CLASSNOTREG; }
+		//return Ret;
+	}
+	else if (riid == IID_IMoniker) {
+		Ret = CoCreateInstance(
+			rclsid,
+			pUnkOuter,
+			dwClsContext,
+			riid,
+			ppv);
+		if (Ret == S_OK)
+		{
+			ICallbackMoniker<IMonikerVtbl>* defaultobj = new ICallbackMoniker<IMonikerVtbl>(*ppv);
+			*ppv = defaultobj;
+			return Ret;
+		}
+		else { Ret = REGDB_E_CLASSNOTREG; }
+		//return Ret;
+	}
+	else if (riid == IID_IStream) {
+		Ret = CoCreateInstance(
+			rclsid,
+			pUnkOuter,
+			dwClsContext,
+			riid,
+			ppv);
+		if (Ret == S_OK)
+		{
+			ICallbackStream<IStreamVtbl>* defaultobj = new ICallbackStream<IStreamVtbl>(*ppv);
+			*ppv = defaultobj;
+			return Ret;
+		}
+		else { Ret = REGDB_E_CLASSNOTREG; }
+		//return Ret;
+	}
+	else if (riid == IID_IBindCtx) {
+	Ret = CoCreateInstance(
+		rclsid,
+		pUnkOuter,
+		dwClsContext,
+		riid,
+		ppv);
+	if (Ret == S_OK)
+	{
+		ICallbackBindCtx<IBindCtxVtbl>* defaultobj = new ICallbackBindCtx<IBindCtxVtbl>(*ppv);
+		*ppv = defaultobj;
+		return Ret;
+	}
+	else { Ret = REGDB_E_CLASSNOTREG; }
+	//return Ret;
+	}
+	else if (riid == IID_IRunningObjectTable) {
+	Ret = CoCreateInstance(
+		rclsid,
+		pUnkOuter,
+		dwClsContext,
+		riid,
+		ppv);
+	if (Ret == S_OK)
+	{
+		ICallbackRunningObjectTable<IRunningObjectTableVtbl>* defaultobj = new ICallbackRunningObjectTable<IRunningObjectTableVtbl>(*ppv);
+		*ppv = defaultobj;
+		return Ret;
+	}
+	else { Ret = REGDB_E_CLASSNOTREG; }
+	//return Ret;
+	}
+	else if (riid == IID_IEnumMoniker) {
+	Ret = CoCreateInstance(
+		rclsid,
+		pUnkOuter,
+		dwClsContext,
+		riid,
+		ppv);
+	if (Ret == S_OK)
+	{
+		ICallbackEnumMoniker<IEnumMonikerVtbl>* defaultobj = new ICallbackEnumMoniker<IEnumMonikerVtbl>(*ppv);
+		*ppv = defaultobj;
+		return Ret;
+	}
+	else { Ret = REGDB_E_CLASSNOTREG; }
+	//return Ret;
+	}
+	else if (riid == IID_IEnumString) {
+	Ret = CoCreateInstance(
+		rclsid,
+		pUnkOuter,
+		dwClsContext,
+		riid,
+		ppv);
+	if (Ret == S_OK)
+	{
+		ICallbackEnumString<IEnumStringVtbl>* defaultobj = new ICallbackEnumString<IEnumStringVtbl>(*ppv);
+		*ppv = defaultobj;
+		return Ret;
+	}
+	else { Ret = REGDB_E_CLASSNOTREG; }
+	//return Ret;
 	}
 
 
