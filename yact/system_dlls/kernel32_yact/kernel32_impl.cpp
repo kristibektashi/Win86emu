@@ -4,6 +4,7 @@
 #include "peldr.h"
 #include "callbacks.h"
 #include "x86emul.h"
+#include "stdio.h"
 
 struct __EXCEPTION_REGISTRATION_RECORD {
     struct __EXCEPTION_REGISTRATION_RECORD *Next;
@@ -453,6 +454,142 @@ EXTERN_C DW STUB_EXPORT yact_GetWindowsDirectoryW(DW *R)
 		*P=0;
 	return wcslen(Ptr);
 }
+
+#ifdef _WIN64
+EXTERN_C DW STUB_EXPORT yact_CreateProcessA(DW* R)
+{
+	STARTUPINFOA StartupInfotmp;
+	PROCESS_INFORMATION ProcessInformationtmp;
+	StartupInfotmp.cb = *(UINT32*)((p9)+4 * 0);
+	StartupInfotmp.lpReserved = (LPSTR)(*(UINT32*)((p9)+4 * 1));
+	StartupInfotmp.lpDesktop = (LPSTR)(*(UINT32*)((p9)+4 * 2));
+	StartupInfotmp.lpTitle = (LPSTR)(*(UINT32*)((p9)+4 * 3));
+	StartupInfotmp.dwX = *(UINT32*)((p9)+4 * 4);
+	StartupInfotmp.dwY = *(UINT32*)((p9)+4 * 5);
+	StartupInfotmp.dwXSize = *(UINT32*)((p9)+4 * 6);
+	StartupInfotmp.dwYSize = *(UINT32*)((p9)+4 * 7);
+	StartupInfotmp.dwXCountChars = *(UINT32*)((p9)+4 * 8);
+	StartupInfotmp.dwYCountChars = *(UINT32*)((p9)+4 * 9);
+	StartupInfotmp.dwFillAttribute = *(UINT32*)((p9)+4 * 10);
+	StartupInfotmp.dwFlags = *(UINT32*)((p9)+4 * 11);
+	StartupInfotmp.wShowWindow = *(UINT16*)((p9)+(4 * 12) + (2 * 0));
+	StartupInfotmp.cbReserved2 = *(UINT16*)((p9)+(4 * 12) + (2 * 1));
+	StartupInfotmp.lpReserved2 = (LPBYTE)*(UINT32*)((p9)+4 * 13);
+	StartupInfotmp.hStdInput = (HANDLE) * (UINT32*)((p9)+4 * 14);
+	StartupInfotmp.hStdOutput = (HANDLE) * (UINT32*)((p9)+4 * 15);
+	StartupInfotmp.hStdError = (HANDLE) * (UINT32*)((p9)+4 * 16);
+	ProcessInformationtmp.hProcess = (HANDLE) * (UINT32*)((p9)+4 * 0);
+	ProcessInformationtmp.hThread = (HANDLE) * (UINT32*)((p9)+4 * 1);
+	ProcessInformationtmp.dwProcessId = * (UINT32*)((p9)+4 * 2);
+	ProcessInformationtmp.dwThreadId = * (UINT32*)((p9)+4 * 3);
+	return CreateProcessA((LPCSTR)p1, (LPSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCSTR)p8, (LPSTARTUPINFOA)&StartupInfotmp, (LPPROCESS_INFORMATION)&ProcessInformationtmp);
+}
+EXTERN_C DW STUB_EXPORT yact_CreateProcessW(DW* R)
+{
+	STARTUPINFOW StartupInfotmp;
+	PROCESS_INFORMATION ProcessInformationtmp;
+	StartupInfotmp.cb = *(UINT32*)((p9)+4 * 0);
+	StartupInfotmp.lpReserved = (LPWSTR)(*(UINT32*)((p9)+4 * 1));
+	StartupInfotmp.lpDesktop = (LPWSTR)(*(UINT32*)((p9)+4 * 2));
+	StartupInfotmp.lpTitle = (LPWSTR)(*(UINT32*)((p9)+4 * 3));
+	StartupInfotmp.dwX = *(UINT32*)((p9)+4 * 4);
+	StartupInfotmp.dwY = *(UINT32*)((p9)+4 * 5);
+	StartupInfotmp.dwXSize = *(UINT32*)((p9)+4 * 6);
+	StartupInfotmp.dwYSize = *(UINT32*)((p9)+4 * 7);
+	StartupInfotmp.dwXCountChars = *(UINT32*)((p9)+4 * 8);
+	StartupInfotmp.dwYCountChars = *(UINT32*)((p9)+4 * 9);
+	StartupInfotmp.dwFillAttribute = *(UINT32*)((p9)+4 * 10);
+	StartupInfotmp.dwFlags = *(UINT32*)((p9)+4 * 11);
+	StartupInfotmp.wShowWindow = *(UINT16*)((p9)+(4 * 12) + (2 * 0));
+	StartupInfotmp.cbReserved2 = *(UINT16*)((p9)+(4 * 12) + (2 * 1));
+	StartupInfotmp.lpReserved2 = (LPBYTE) * (UINT32*)((p9)+4 * 13);
+	StartupInfotmp.hStdInput = (HANDLE) * (UINT32*)((p9)+4 * 14);
+	StartupInfotmp.hStdOutput = (HANDLE) * (UINT32*)((p9)+4 * 15);
+	StartupInfotmp.hStdError = (HANDLE) * (UINT32*)((p9)+4 * 16);
+	ProcessInformationtmp.hProcess = (HANDLE) * (UINT32*)((p9)+4 * 0);
+	ProcessInformationtmp.hThread = (HANDLE) * (UINT32*)((p9)+4 * 1);
+	ProcessInformationtmp.dwProcessId = *(UINT32*)((p9)+4 * 2);
+	ProcessInformationtmp.dwThreadId = *(UINT32*)((p9)+4 * 3);
+	return CreateProcessW((LPWSTR)p1, (LPWSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCWSTR)p8, (LPSTARTUPINFOW)&StartupInfotmp, (LPPROCESS_INFORMATION)&ProcessInformationtmp);
+}
+#endif
+
+
+#if 0
+EXTERN_C DW STUB_EXPORT yact_CreateProcessA(DW* R)
+{
+	char windowsdir[1024];
+	DWORD Ret = GetModuleFileNameA(0, windowsdir, 1024);
+	char *windowsdir2 = strrchr(windowsdir, '\\');
+	char windowsdir3[4096] = "";
+	const char windowsdirtmp[128] = "\\execveapp.exe";
+	char windowsdirtmp2[1024] = "";
+	if (windowsdir2) { *windowsdir2 = 0; }
+	strcat(windowsdirtmp2, windowsdir);
+	strcat(windowsdirtmp2,((char*)windowsdirtmp));
+	//MessageBoxA(0, windowsdirtmp2, "", 0);
+	FILE* fp4chk = fopen(windowsdirtmp2, "r");
+	if (fp4chk != 0) {
+		fclose(fp4chk);
+		if (((char*)p1) != 0) {
+			strcat(windowsdir3, windowsdirtmp2);
+			strcat(windowsdir3, " ");
+			strcat(windowsdir3, "\"");
+			strcat(windowsdir3, ((char*)p1));
+			strcat(windowsdir3, "\"");
+			strcat(windowsdir3, ((char*)p2)+strlen(((char*)p1)));
+			return CreateProcessA(windowsdirtmp2, (LPSTR)windowsdir3, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCSTR)p8, (LPSTARTUPINFOA)p9, (LPPROCESS_INFORMATION)p10);
+		}
+		else {
+			strcat(windowsdir3, windowsdirtmp2);
+			strcat(windowsdir3, " ");
+			strcat(windowsdir3, ((char*)p2));
+			return CreateProcessA(windowsdirtmp2, (LPSTR)windowsdir3, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCSTR)p8, (LPSTARTUPINFOA)p9, (LPPROCESS_INFORMATION)p10);
+		}
+	}
+	else {
+		return CreateProcessA((LPCSTR)p1, (LPSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCSTR)p8, (LPSTARTUPINFOA)p9, (LPPROCESS_INFORMATION)p10);
+	}
+}
+EXTERN_C DW STUB_EXPORT yact_CreateProcessW(DW* R)
+{
+	wchar_t windowsdir[1024] = L"";
+	DWORD Ret = GetModuleFileNameW(0, windowsdir, 1024);
+	wchar_t *windowsdir2 = wcsrchr(windowsdir, '\\');
+	wchar_t windowsdir3[2048] = L"";
+	const wchar_t windowsdirtmp[128] = L"\\execveapp.exe";
+	wchar_t windowsdirtmp2[1024] = L"";
+	if (windowsdir2) { *windowsdir2 = 0; }
+	wcscat_s(windowsdirtmp2, windowsdir);
+	wcscat_s(windowsdirtmp2, ((wchar_t*)windowsdirtmp));
+	char windowsdirtmp2x[1024];
+	wcstombs(windowsdirtmp2x, windowsdirtmp2, 1024);
+	//MessageBoxW(0, windowsdirtmp2, L"", 0);
+	FILE* fp4chk = fopen((char*)windowsdirtmp2x, "r");
+	if (fp4chk != 0) {
+		fclose(fp4chk);
+		if (((wchar_t*)p1) != 0) {
+			wcscat_s(windowsdir3, windowsdirtmp2);
+			wcscat_s(windowsdir3, L" ");
+			wcscat_s(windowsdir3, L"\"");
+			wcscat_s(windowsdir3, ((wchar_t*)p1));
+			wcscat_s(windowsdir3, L"\"");
+			wcscat_s(windowsdir3, ((wchar_t*)p2)+wcslen(((wchar_t*)p1)));
+			return CreateProcessW(windowsdirtmp2, (LPWSTR)windowsdir3, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCWSTR)p8, (LPSTARTUPINFOW)p9, (LPPROCESS_INFORMATION)p10);
+		}
+		else {
+			wcscat_s(windowsdir3, windowsdirtmp2);
+			wcscat_s(windowsdir3, L" ");
+			wcscat_s(windowsdir3, ((wchar_t*)p2));
+			return CreateProcessW(windowsdirtmp2, (LPWSTR)windowsdir3, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCWSTR)p8, (LPSTARTUPINFOW)p9, (LPPROCESS_INFORMATION)p10);
+		}
+	}
+	else {
+		return CreateProcessW((LPWSTR)p1, (LPWSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCWSTR)p8, (LPSTARTUPINFOW)p9, (LPPROCESS_INFORMATION)p10);
+	}
+}
+
+#endif
 
 EXTERN_C DW STUB_EXPORT yact_GetSystemWindowsDirectoryA(DW *R)
 {

@@ -9,6 +9,11 @@
 #include <ShlDisp.h>
 #include "callbacks.h"
 
+#include "Exdisp.h"
+
+#define INITGUID
+#include "guiddef.h"
+
 //DEFINE_FUNC2(RegisterDragDrop)
 EXTERN_C DW STUB_EXPORT yact_RegisterDragDrop(DW *R)
 {
@@ -25,6 +30,14 @@ EXTERN_C DW COMSTUB_EXPORT AC_Init(DW *R)
 DEFINE_COMFUNC2(AC,IAutoComplete2Vtbl,Enable);
 DEFINE_COMFUNC2(AC,IAutoComplete2Vtbl,SetOptions);
 DEFINE_COMFUNC2(AC,IAutoComplete2Vtbl,GetOptions);
+
+
+DEFINE_COMFUNC2(IE, DWebBrowserEvents2Vtbl, GetTypeInfoCount);
+DEFINE_COMFUNC4(IE, DWebBrowserEvents2Vtbl, GetTypeInfo);
+DEFINE_COMFUNC6(IE, DWebBrowserEvents2Vtbl, GetIDsOfNames);
+DEFINE_COMFUNC9(IE, DWebBrowserEvents2Vtbl, Invoke);
+
+DEFINE_GUID(DIID_DWebBrowserEvents2_, 0x8856f961,0x340a,0x11d0,0xa9,0x6b,0x00,0xc0,0x4f,0xd7,0x05,0xa2);
 
 EXTERN_C DW STUB_EXPORT yact_CoCreateInstanceNT(DW *R)
 {
@@ -53,7 +66,23 @@ EXTERN_C DW STUB_EXPORT yact_CoCreateInstanceNT(DW *R)
 			DEFINE_CALLBACK2(AC,IAutoComplete2Vtbl,GetOptions);
 		}
 		return Ret;
+	} else {
+		Ret = CoCreateInstance(
+			rclsid,
+			pUnkOuter,
+			dwClsContext,
+			riid,
+			ppv);
+		if (Ret == S_OK)
+		{
+			ICallbackDispatch<DWebBrowserEvents2Vtbl>* defaultobj = new ICallbackDispatch<DWebBrowserEvents2Vtbl>(*ppv);
+			*ppv = defaultobj;
+			return Ret;
+		}
+		else { Ret = REGDB_E_CLASSNOTREG; }
+		//return Ret;
 	}
+
 
 	LogWarn("Not implemented CLSID: {%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
              rclsid.Data1, rclsid.Data2, rclsid.Data3,

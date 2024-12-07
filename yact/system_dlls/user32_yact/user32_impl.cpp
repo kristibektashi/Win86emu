@@ -13,6 +13,16 @@
 #include <richedit.h>
 #include <string>
 
+#ifndef GWL_WNDPROC
+#define GWL_WNDPROC -4
+#endif
+#ifndef DWL_DLGPROC
+#define DWL_DLGPROC (DWLP_MSGRESULT + sizeof(LRESULT))
+#endif
+#ifndef GCL_WNDPROC
+#define GCL_WNDPROC -24
+#endif
+
 using namespace std;
 map<string,DWORD> OrigWndProcs;
 
@@ -704,6 +714,16 @@ BOOL SendCustomMessage(t_SendMessage SendMessageProc,HWND hWnd,UINT Msg, WPARAM 
 		if(IsWindowClass(hWnd,WC_LISTVIEWA))
 		{
 			*Ret=SendMessageProc(hWnd,Msg,wParam,CbCreateNativeStdcallCallback(lParam,3));	
+			return TRUE;		
+		}
+		break;
+	case TVM_SORTCHILDRENCB:
+		if(IsWindowClass(hWnd,WC_EDITA))
+		{
+			TVSORTCB *TSC=(TVSORTCB*)lParam;
+			if (TSC->lpfnCompare)
+				TSC->lpfnCompare = (PFNTVCOMPARE)CbCreateNativeStdcallCallback((DW)TSC->lpfnCompare, 3);
+			*Ret=SendMessageProc(hWnd,Msg,wParam,lParam);
 			return TRUE;		
 		}
 		break;
