@@ -192,10 +192,12 @@ unsigned int ProcessCallback(unsigned int reg_eax, unsigned int reg_eip)
 {
 	DWORD *Param=(DWORD*)reg_eax;
 	DWORD Func=*(DWORD*)(reg_eip-4);
+	DWORD Functemp = 0;
 
 	if((0x80000000&Func)==0)
 	{
-		Func=0x80000000|(DWORD)GetHookAddress(((char**)Func)[0],((char**)Func)[1]);
+		Functemp= (DWORD)GetHookAddress(((char**)Func)[0], ((char**)Func)[1]);
+		Func=0x80000000|Functemp;//(DWORD)GetHookAddress(((char**)Func)[0],((char**)Func)[1]);
 #if 1 //def _DEBUG
 		if(0x80000000==Func)
 		{
@@ -209,6 +211,7 @@ unsigned int ProcessCallback(unsigned int reg_eax, unsigned int reg_eip)
 			exit(0);
 		}
 #endif
+		//*(UINT8*)(reg_eip-5)=(Functemp&0x80000000) ? 1:0;
 		*(DWORD*)(reg_eip-4)=Func;
 	}
 
@@ -220,7 +223,8 @@ unsigned int ProcessCallback(unsigned int reg_eax, unsigned int reg_eip)
 #endif
 	int tmp=0;
 	__try {
-		tmp=((func*)(0x7fffffff&Func))(Param);
+		//tmp=((func*)(((*(UINT8*)(reg_eip-5))?0x80000000:0)|(0x7fffffff&Func)))(Param);
+		tmp = ((func*)((0x7fffffff & Func)))(Param);
 	} __except(EXCEPTION_EXECUTE_HANDLER)
 	{
 #ifdef _DEBUG
@@ -398,6 +402,8 @@ EMU_EXPORT BOOL EmuInitialize(void)
 	bx_cpu_count=1;
 	bx_init_siminterface();
 	bx_init_options();
+
+	SIM->get_param_string(BXPN_BRAND_STRING)->set("VirtualApple @ 2.50GHz");
 
 	SIM->set_init_done(1);
 
@@ -642,7 +648,11 @@ EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)
 
 		// CR0 deltas
 		BX_CPU(0)->cr0.set_PE(1); // protected mode
-		BX_CPU(0)->cr4.set_OSFXSR(0);	// no SSE
+		//BX_CPU(0)->cr4.set_OSFXSR(0);	// no SSE
+		BX_CPU(0)->cr4.set_OSFXSR(1);	// SSE Enabled
+		BX_CPU(0)->cr4.set_OSXSAVE(1);
+		BX_CPU(0)->cr4.set_OSXMMEXCPT(1);
+		BX_CPU(0)->cr0.set_MP(1);
 		BX_CPU(0)->set_IF(1);
 		BX_CPU(0)->the_i387.cwd=GetFPUCW();	
 		BX_CPU(0)->the_i387.swd=0x122;
@@ -651,6 +661,10 @@ EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)
 		BX_CPU(0)->handleCpuModeChange();
 		//BX_CPU(0)->handleSseModeChange();
 		BX_CPU(0)->trace=0;
+
+		BX_CPU(0)->init_isa_features_bitmask();
+		BX_CPU(0)->set_cpuid_defaults();
+		BX_CPU(0)->handleSseModeChange();
 	}
 	CbCallAtThreadExit(ReuseBX_CPU,BX_CPU(0));
 
@@ -698,4 +712,16 @@ EMU_EXPORT DWORD EmuExecute(DWORD Addr, int NParams,...)
 	ReuseBX_CPU(BX_CPU(0));
 
 	return ret;
+}
+
+
+int __declspec(thread) FPU_cw = 0x37F;
+EMU_EXPORT int GetFPUCW()
+{
+	return FPU_cw;
+}
+
+EMU_EXPORT void SetFPUCW(int cw)
+{
+	FPU_cw = cw;
 }
