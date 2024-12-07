@@ -30,6 +30,7 @@
     <ProjectGuid>{10F396D1-1AD0-4D7E-B2C1-497EC3BA629D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cpihook</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

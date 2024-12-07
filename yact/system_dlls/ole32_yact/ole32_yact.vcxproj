@@ -31,6 +31,7 @@
     <RootNamespace>ole32_yact</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>ole32.nt</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
