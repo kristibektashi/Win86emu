@@ -7,3 +7,10 @@
 *.opensdf
 *.lpch
 *.vcxproj.user
+*.log
+*.txt
+*.obj
+.vs/
+*.exe.recipe
+*.exp
+*.lib
