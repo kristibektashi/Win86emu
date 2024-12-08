@@ -99,25 +99,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);U:\DynamicTranslator\yact\inc;U:\DynamicTranslator\yact\</IncludePath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\SystemNT\</OutDir>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);U:\DynamicTranslator\yact\inc;U:\DynamicTranslator\yact\</IncludePath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\SystemNT\</OutDir>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_ARM);$(WindowsSDK_LibraryPath_ARM)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);U:\DynamicTranslator\yact\inc;U:\DynamicTranslator\yact\</IncludePath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\SystemNT\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);U:\DynamicTranslator\yact\inc;U:\DynamicTranslator\yact\</IncludePath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_ARM);$(WindowsSDK_LibraryPath_ARM)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\SystemNT\</OutDir>
   </PropertyGroup>
