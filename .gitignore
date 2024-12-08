@@ -14,3 +14,4 @@
 *.exe.recipe
 *.exp
 *.lib
+*.dll.recipe
