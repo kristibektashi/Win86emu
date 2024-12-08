@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E4922A7C-F209-4713-A0BE-89BCFB9D4B6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "system(native)", "system(native)", "{CCA96586-B025-4158-975E-961F95B8D271}"
-	ProjectSection(SolutionItems) = preProject
-		yact\system_dlls\shell32_yact\shell32_yact.vcxproj = yact\system_dlls\shell32_yact\shell32_yact.vcxproj
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4E91220F-A9FC-4C56-B75A-C60C9327903A}"
 EndProject
@@ -412,6 +409,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hooker", "yact\hooks4cpihook\hooker\hooker.vcxproj", "{0978263D-FADE-4C49-A380-3CA626121D55}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EXE_Stub", "yact\EXE_Stub\EXE_Stub.vcxproj", "{8528311B-63F6-4225-845D-85CD15C21843}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shell32.nt", "yact\system_dlls\shell32_yact\shell32_yact.vcxproj", "{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}"
+	ProjectSection(SolutionItems) = preProject
+		yact\system_dlls\shell32_yact\shell32_yact.vcxproj = yact\system_dlls\shell32_yact\shell32_yact.vcxproj
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2857,6 +2859,16 @@ Global
 		{8528311B-63F6-4225-845D-85CD15C21843}.Release|Win32.ActiveCfg = Release|Win32
 		{8528311B-63F6-4225-845D-85CD15C21843}.Release|Win32.Build.0 = Release|Win32
 		{8528311B-63F6-4225-845D-85CD15C21843}.Release|x64.ActiveCfg = Release|Win32
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Debug|ARM.ActiveCfg = Debug|ARM
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Debug|ARM.Build.0 = Debug|ARM
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Debug|Win32.Build.0 = Debug|Win32
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Debug|x64.ActiveCfg = Debug|Win32
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Release|ARM.ActiveCfg = Release|ARM
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Release|ARM.Build.0 = Release|ARM
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Release|Win32.ActiveCfg = Release|Win32
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Release|Win32.Build.0 = Release|Win32
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3053,6 +3065,7 @@ Global
 		{EEA98E39-F84E-4F37-A2C0-E70F2771D031} = {10C7C94D-0E05-4F4B-AE75-B84B7D3D3665}
 		{0978263D-FADE-4C49-A380-3CA626121D55} = {10C7C94D-0E05-4F4B-AE75-B84B7D3D3665}
 		{8528311B-63F6-4225-845D-85CD15C21843} = {4E91220F-A9FC-4C56-B75A-C60C9327903A}
+		{DD2D6E49-EDA6-43C3-A7EC-471C6F8FF2EC} = {CCA96586-B025-4158-975E-961F95B8D271}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F20ACCF1-9E07-4E21-B4EC-B75A8D87B533}
