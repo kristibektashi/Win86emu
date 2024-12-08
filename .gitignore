@@ -16,3 +16,5 @@
 *.dll.recipe
 *.tlog
 *.lastbuildstate
+*.idb
+*.pch
