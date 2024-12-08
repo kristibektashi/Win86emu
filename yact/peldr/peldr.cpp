@@ -516,41 +516,84 @@ static LPVOID PeLdrInternalLoadModule(PE_HANDLE Pe, LPVOID DesiredAddress)
     Pe->AllocatedMem = FALSE;
     DWORD ModuleSize = PeLdrCalcModuleRamSize(Pe);
 
-    if (ModuleSize && DesiredAddress) // as we can't rebase - try to "get" memory where needed (possibly overwriting something)
-    {
-        SYSTEM_INFO si;
-        GetSystemInfo(&si);
-        for (DWORD i = (DWORD) DesiredAddress; i < (DWORD) DesiredAddress + ModuleSize; i += si.dwAllocationGranularity)
-        {
-            if (VirtualAlloc((void*) i, si.dwAllocationGranularity, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE) == 0)
-            {
-                MEMORY_BASIC_INFORMATION mbi;
-                VirtualQuery((void*) i, &mbi, sizeof(mbi));
-                if (VirtualProtect(mbi.BaseAddress, mbi.RegionSize, PAGE_READWRITE, &Tmp) == 0)	// reuse that memory
-                {
-                    Tmp = GetLastError();
-                    LogInfo("Reusing address: %08X, base address: %08X failed, error=%d\n", i, mbi.BaseAddress, Tmp);
-                }
-                else
-                {
-                    LogInfo("Reusing address: %08X, base address: %08X, size %08X\n", i, mbi.BaseAddress, mbi.RegionSize);
-                    i += mbi.RegionSize - si.dwAllocationGranularity;
-                }
-            }
-        }
-    }
+	if (ModuleSize && DesiredAddress) // as we can't rebase - try to "get" memory where needed (possibly overwriting something)
+	{
+		SYSTEM_INFO si;
+		GetSystemInfo(&si);
+		for (DWORD i = (DWORD) DesiredAddress; i < (DWORD) DesiredAddress + ModuleSize; i += si.dwAllocationGranularity)
+		{
+			if (VirtualAlloc((void*) i ,si.dwAllocationGranularity, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE) == 0)
+			{
+				MEMORY_BASIC_INFORMATION mbi;
+				VirtualQuery((void*) i, &mbi, sizeof(mbi));
+				if (VirtualProtect(mbi.BaseAddress, mbi.RegionSize, PAGE_READWRITE, &Tmp) == 0)	// reuse that memory
+				{
+					Tmp = GetLastError();
+					LogInfo("Reusing address: %08X, base address: %08X failed, error=%d\n", i, mbi.BaseAddress, Tmp);
+				} else
+				{
+					LogInfo("Reusing address: %08X, base address: %08X, size %08X\n", i, mbi.BaseAddress, mbi.RegionSize);
+					i += mbi.RegionSize - si.dwAllocationGranularity;
+				}
+			}
+		}
+	}	
 
-    if (ModuleSize && DesiredAddress == 0)
-    {
-        DesiredAddress = (LPVOID) PeLdrGetFixedLoadAddress(Pe);	// Get base address if fixed
-        DesiredAddress = VirtualAlloc(DesiredAddress, ModuleSize, MEM_COMMIT, PAGE_READWRITE);
-        if (DesiredAddress)
-            Pe->AllocatedMem = TRUE;
-    }
-    if (DesiredAddress == 0 || ModuleSize == 0)
-    {
-        goto Error;
-    }
+	if(ModuleSize && DesiredAddress == 0)
+	{
+		DesiredAddress = (LPVOID) PeLdrGetFixedLoadAddress(Pe);	// Get base address if fixed
+		DesiredAddress = VirtualAlloc(DesiredAddress, ModuleSize, MEM_COMMIT, PAGE_READWRITE);
+#if 1
+		DWORD DesiredAddressold = (DW)DesiredAddress;
+		if (((DW)DesiredAddress)&0x80000000) {
+			VirtualFree(DesiredAddress, ModuleSize, MEM_RELEASE);
+			//LogWarn("Casted for %08X\n", ((((DW)DesiredAddress) & 0x7FFFFFFF)|0));
+			DesiredAddress = VirtualAlloc((LPVOID)((((DW)DesiredAddress) & 0x7FFFFFFF)|0), ModuleSize, MEM_COMMIT, PAGE_READWRITE);
+			if (DesiredAddress == nullptr) {
+				DesiredAddress = (LPVOID)((((DW)DesiredAddressold) & 0x7FFFFFFF) | 0);
+		SYSTEM_INFO si;
+		GetSystemInfo(&si);
+		for(DWORD i=(DWORD)DesiredAddress; i<(DWORD)DesiredAddress+ModuleSize; i+=si.dwAllocationGranularity)
+		{
+			if(VirtualAlloc((void*)i,si.dwAllocationGranularity,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE)==0)
+			{
+				MEMORY_BASIC_INFORMATION mbi;
+				VirtualQuery((void*)i,&mbi,sizeof(mbi));
+				if(VirtualProtect(mbi.BaseAddress,mbi.RegionSize,PAGE_READWRITE,&Tmp)==0)	// reuse that memory
+				{
+					Tmp=GetLastError();
+					LogInfo("Reusing address: %08X, base address: %08X failed, error=%d\n",i,mbi.BaseAddress,Tmp);
+				} else
+				{
+					LogInfo("Reusing address: %08X, base address: %08X, size %08X\n",i,mbi.BaseAddress,mbi.RegionSize);
+					i+=mbi.RegionSize-si.dwAllocationGranularity;
+				}
+			}
+		}
+
+			}
+#if 0
+			int cnt4addr = 0;
+			while (true) {
+				if (DesiredAddress == nullptr) {
+					cnt4addr++;
+					DW DesiredAddressBCCC = ((0x500000) + (cnt4addr * 4096));
+						DesiredAddress = VirtualAlloc((LPVOID)DesiredAddressBCCC, ModuleSize, MEM_COMMIT, PAGE_READWRITE);
+				}
+				else {
+					break;
+				}
+			}
+#endif
+		}
+#endif
+		if (DesiredAddress)
+			Pe->AllocatedMem = TRUE;
+	}
+	if (DesiredAddress == 0 || ModuleSize == 0)
+	{
+		goto Error;
+	}
 
     VirtualProtect(DesiredAddress, ModuleSize, PAGE_READWRITE, &Tmp);
 

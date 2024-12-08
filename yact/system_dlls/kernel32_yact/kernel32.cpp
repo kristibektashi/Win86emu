@@ -207,8 +207,10 @@ DEFINE_FUNC8(CreateNamedPipeW)
 DEFINE_FUNC4(CreatePipe)
 DEFINE_FUNC3(CreatePrivateNamespaceA)
 DEFINE_FUNC3(CreatePrivateNamespaceW)
-/*DEFINE_FUNC10(CreateProcessA)
-DEFINE_FUNC10(CreateProcessW)*/
+#ifndef _WIN64
+DEFINE_FUNC10(CreateProcessA)
+DEFINE_FUNC10(CreateProcessW)
+#endif
 //DEFINE_FUNC7(CreateRemoteThread)		-- TODO - only in x86 emulated progs!
 DEFINE_FUNC4(CreateSemaphoreA)
 DEFINE_FUNC6(CreateSemaphoreExA)
@@ -691,8 +693,8 @@ DEFINE_FUNC3(HeapSize)
 DEFINE_FUNC1(HeapUnlock)
 DEFINE_FUNC3(HeapValidate)
 DEFINE_FUNC2(HeapWalk)
-DEFINE_FUNC5(IdnToAscii)
-DEFINE_FUNC5(IdnToUnicode)
+/*DEFINE_FUNC5(IdnToAscii)
+DEFINE_FUNC5(IdnToUnicode)*/
 DEFINE_FUNC1(InitAtomTable)
 DEFINE_FUNC4(InitOnceBeginInitialize)
 DEFINE_FUNC3(InitOnceComplete)

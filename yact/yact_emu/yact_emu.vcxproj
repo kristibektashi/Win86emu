@@ -93,7 +93,7 @@
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
@@ -101,6 +101,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -110,13 +111,14 @@
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,7 +128,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;YACT_EMU_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -136,6 +138,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -145,7 +148,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;YACT_EMU_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -157,6 +160,7 @@
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -175,6 +179,46 @@
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</CompileAsManaged>
     </ClCompile>
+    <ClCompile Include="np21_i386c\cpucore.cpp" />
+    <ClCompile Include="np21_i386c\cpumem.cpp" />
+    <ClCompile Include="np21_i386c\ia32\cpu.cpp" />
+    <ClCompile Include="np21_i386c\ia32\cpu_io.cpp" />
+    <ClCompile Include="np21_i386c\ia32\cpu_mem.cpp" />
+    <ClCompile Include="np21_i386c\ia32\ctrlxfer.cpp" />
+    <ClCompile Include="np21_i386c\ia32\debug.cpp" />
+    <ClCompile Include="np21_i386c\ia32\disasm.cpp" />
+    <ClCompile Include="np21_i386c\ia32\exception.cpp" />
+    <ClCompile Include="np21_i386c\ia32\groups.cpp" />
+    <ClCompile Include="np21_i386c\ia32\ia32.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\bin_arith.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\bit_byte.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\ctrl_trans.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\data_trans.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\dec_arith.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\flag_ctrl.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\fpu.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\fpu\fpdummy.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\fpu\fpemul_dosbox.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\fpu\fpemul_dosbox2.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\fpu\fpemul_softfloat.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\fpu\softfloat\softfloat.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\logic_arith.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\misc_inst.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\mmx\3dnow.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\mmx\mmx.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\seg_reg.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\shift_rotate.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\sse2\sse2.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\sse3\sse3.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\sse\sse.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\string_inst.cpp" />
+    <ClCompile Include="np21_i386c\ia32\instructions\system_inst.cpp" />
+    <ClCompile Include="np21_i386c\ia32\inst_table.cpp" />
+    <ClCompile Include="np21_i386c\ia32\interface.cpp" />
+    <ClCompile Include="np21_i386c\ia32\paging.cpp" />
+    <ClCompile Include="np21_i386c\ia32\resolve.cpp" />
+    <ClCompile Include="np21_i386c\ia32\segments.cpp" />
+    <ClCompile Include="np21_i386c\ia32\task.cpp" />
     <ClCompile Include="onebytecmds.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -191,6 +235,20 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cbacks\cbacks.vcxproj">
+      <Project>{ee3bef7a-bd4e-43bd-b55a-989a2ae71018}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\peldr\peldr.vcxproj">
+      <Project>{f4068177-8367-4d29-afc8-fab7851fcfdb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\supp\supp.vcxproj">
+      <Project>{fc1b34a9-985f-480e-8d3c-02f593a6e100}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\x86_emu\x86_emu.vcxproj">
+      <Project>{f01a0d79-1e73-41ec-9021-4351bac8fcb8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

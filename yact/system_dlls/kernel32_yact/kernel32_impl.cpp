@@ -455,6 +455,67 @@ EXTERN_C DW STUB_EXPORT yact_GetWindowsDirectoryW(DW *R)
 	return wcslen(Ptr);
 }
 
+#ifdef _WIN64
+EXTERN_C DW STUB_EXPORT yact_CreateProcessA(DW* R)
+{
+	STARTUPINFOA StartupInfotmp;
+	PROCESS_INFORMATION ProcessInformationtmp;
+	StartupInfotmp.cb = *(UINT32*)((p9)+4 * 0);
+	StartupInfotmp.lpReserved = (LPSTR)(*(UINT32*)((p9)+4 * 1));
+	StartupInfotmp.lpDesktop = (LPSTR)(*(UINT32*)((p9)+4 * 2));
+	StartupInfotmp.lpTitle = (LPSTR)(*(UINT32*)((p9)+4 * 3));
+	StartupInfotmp.dwX = *(UINT32*)((p9)+4 * 4);
+	StartupInfotmp.dwY = *(UINT32*)((p9)+4 * 5);
+	StartupInfotmp.dwXSize = *(UINT32*)((p9)+4 * 6);
+	StartupInfotmp.dwYSize = *(UINT32*)((p9)+4 * 7);
+	StartupInfotmp.dwXCountChars = *(UINT32*)((p9)+4 * 8);
+	StartupInfotmp.dwYCountChars = *(UINT32*)((p9)+4 * 9);
+	StartupInfotmp.dwFillAttribute = *(UINT32*)((p9)+4 * 10);
+	StartupInfotmp.dwFlags = *(UINT32*)((p9)+4 * 11);
+	StartupInfotmp.wShowWindow = *(UINT16*)((p9)+(4 * 12) + (2 * 0));
+	StartupInfotmp.cbReserved2 = *(UINT16*)((p9)+(4 * 12) + (2 * 1));
+	StartupInfotmp.lpReserved2 = (LPBYTE)*(UINT32*)((p9)+4 * 13);
+	StartupInfotmp.hStdInput = (HANDLE) * (UINT32*)((p9)+4 * 14);
+	StartupInfotmp.hStdOutput = (HANDLE) * (UINT32*)((p9)+4 * 15);
+	StartupInfotmp.hStdError = (HANDLE) * (UINT32*)((p9)+4 * 16);
+	ProcessInformationtmp.hProcess = (HANDLE) * (UINT32*)((p9)+4 * 0);
+	ProcessInformationtmp.hThread = (HANDLE) * (UINT32*)((p9)+4 * 1);
+	ProcessInformationtmp.dwProcessId = * (UINT32*)((p9)+4 * 2);
+	ProcessInformationtmp.dwThreadId = * (UINT32*)((p9)+4 * 3);
+	return CreateProcessA((LPCSTR)p1, (LPSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCSTR)p8, (LPSTARTUPINFOA)&StartupInfotmp, (LPPROCESS_INFORMATION)&ProcessInformationtmp);
+}
+EXTERN_C DW STUB_EXPORT yact_CreateProcessW(DW* R)
+{
+	STARTUPINFOW StartupInfotmp;
+	PROCESS_INFORMATION ProcessInformationtmp;
+	StartupInfotmp.cb = *(UINT32*)((p9)+4 * 0);
+	StartupInfotmp.lpReserved = (LPWSTR)(*(UINT32*)((p9)+4 * 1));
+	StartupInfotmp.lpDesktop = (LPWSTR)(*(UINT32*)((p9)+4 * 2));
+	StartupInfotmp.lpTitle = (LPWSTR)(*(UINT32*)((p9)+4 * 3));
+	StartupInfotmp.dwX = *(UINT32*)((p9)+4 * 4);
+	StartupInfotmp.dwY = *(UINT32*)((p9)+4 * 5);
+	StartupInfotmp.dwXSize = *(UINT32*)((p9)+4 * 6);
+	StartupInfotmp.dwYSize = *(UINT32*)((p9)+4 * 7);
+	StartupInfotmp.dwXCountChars = *(UINT32*)((p9)+4 * 8);
+	StartupInfotmp.dwYCountChars = *(UINT32*)((p9)+4 * 9);
+	StartupInfotmp.dwFillAttribute = *(UINT32*)((p9)+4 * 10);
+	StartupInfotmp.dwFlags = *(UINT32*)((p9)+4 * 11);
+	StartupInfotmp.wShowWindow = *(UINT16*)((p9)+(4 * 12) + (2 * 0));
+	StartupInfotmp.cbReserved2 = *(UINT16*)((p9)+(4 * 12) + (2 * 1));
+	StartupInfotmp.lpReserved2 = (LPBYTE) * (UINT32*)((p9)+4 * 13);
+	StartupInfotmp.hStdInput = (HANDLE) * (UINT32*)((p9)+4 * 14);
+	StartupInfotmp.hStdOutput = (HANDLE) * (UINT32*)((p9)+4 * 15);
+	StartupInfotmp.hStdError = (HANDLE) * (UINT32*)((p9)+4 * 16);
+	ProcessInformationtmp.hProcess = (HANDLE) * (UINT32*)((p9)+4 * 0);
+	ProcessInformationtmp.hThread = (HANDLE) * (UINT32*)((p9)+4 * 1);
+	ProcessInformationtmp.dwProcessId = *(UINT32*)((p9)+4 * 2);
+	ProcessInformationtmp.dwThreadId = *(UINT32*)((p9)+4 * 3);
+	return CreateProcessW((LPWSTR)p1, (LPWSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCWSTR)p8, (LPSTARTUPINFOW)&StartupInfotmp, (LPPROCESS_INFORMATION)&ProcessInformationtmp);
+}
+#endif
+
+
+#if 0
 EXTERN_C DW STUB_EXPORT yact_CreateProcessA(DW* R)
 {
 	char windowsdir[1024];
@@ -527,6 +588,8 @@ EXTERN_C DW STUB_EXPORT yact_CreateProcessW(DW* R)
 		return CreateProcessW((LPWSTR)p1, (LPWSTR)p2, (LPSECURITY_ATTRIBUTES)p3, (LPSECURITY_ATTRIBUTES)p4, p5, p6, (LPVOID)p7, (LPCWSTR)p8, (LPSTARTUPINFOW)p9, (LPPROCESS_INFORMATION)p10);
 	}
 }
+
+#endif
 
 EXTERN_C DW STUB_EXPORT yact_GetSystemWindowsDirectoryA(DW *R)
 {

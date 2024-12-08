@@ -348,8 +348,8 @@ DEFINE_FUNC1(WidenPath)
 DEFINE_FUNC6(gdiPlaySpoolStream)
 DEFINE_FUNC2(SetLayout)
 
-/*EXTERN_C DW STUB_EXPORT yact_namesx(DW* R)
-{
-	LEAVE(0);
-	return 0;
-}*/
+// EXTERN_C DW STUB_EXPORT yact_namesx(DW* R)
+// {
+// 	LEAVE(0);
+// 	return 0;
+// }
