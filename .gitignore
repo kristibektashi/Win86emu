@@ -13,7 +13,6 @@
 .vs/
 *.exe.recipe
 *.exp
-*.lib
 *.dll.recipe
 *.tlog
 *.lastbuildstate
