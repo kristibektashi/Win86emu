@@ -4,7 +4,7 @@
 // but are changed infrequently
 
 #pragma once
-#define _AFX_NO_MFC_CONTROLS_IN_DIALOGS 
+//#define _AFX_NO_MFC_CONTROLS_IN_DIALOGS
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // Exclude rarely-used stuff from Windows headers
 #endif
