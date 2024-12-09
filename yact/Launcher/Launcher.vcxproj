@@ -107,6 +107,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>imagehlp.lib</AdditionalDependencies>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -132,6 +133,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>imagehlp.lib</AdditionalDependencies>
       <UACUIAccess>false</UACUIAccess>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -160,6 +162,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>imagehlp.lib</AdditionalDependencies>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -189,6 +192,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>imagehlp.lib</AdditionalDependencies>
       <UACUIAccess>false</UACUIAccess>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

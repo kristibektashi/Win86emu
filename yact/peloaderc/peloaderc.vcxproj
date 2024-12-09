@@ -101,6 +101,7 @@
       <BaseAddress>0x300000</BaseAddress>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>true</DataExecutionPrevention>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -114,6 +115,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,6 +134,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <BaseAddress>0x300000</BaseAddress>
       <LargeAddressAware>true</LargeAddressAware>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -149,6 +152,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <BaseAddress>0x300000</BaseAddress>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

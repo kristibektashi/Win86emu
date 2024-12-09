@@ -143,6 +143,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -161,6 +162,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);gdi32.lib</AdditionalDependencies>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -178,6 +180,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);gdi32.lib</AdditionalDependencies>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -197,6 +200,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -220,6 +224,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);gdi32.lib</AdditionalDependencies>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -243,6 +248,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);gdi32.lib</AdditionalDependencies>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

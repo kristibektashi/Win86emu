@@ -70,6 +70,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <FixedBaseAddress>true</FixedBaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,6 +92,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <FixedBaseAddress>true</FixedBaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

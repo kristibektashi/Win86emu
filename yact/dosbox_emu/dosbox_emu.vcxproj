@@ -108,6 +108,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -132,6 +133,7 @@
       <StackReserveSize>3145728</StackReserveSize>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,6 +156,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -186,6 +189,7 @@
       <StackReserveSize>3145728</StackReserveSize>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

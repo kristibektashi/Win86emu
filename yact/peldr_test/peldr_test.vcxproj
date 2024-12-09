@@ -115,6 +115,7 @@
       <UACUIAccess>
       </UACUIAccess>
       <EnableUAC>false</EnableUAC>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>
@@ -141,6 +142,7 @@
       <FixedBaseAddress>false</FixedBaseAddress>
       <StackReserveSize>4194304</StackReserveSize>
       <UACUIAccess>false</UACUIAccess>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>
@@ -168,6 +170,7 @@
       <FixedBaseAddress>false</FixedBaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
       <LargeAddressAware>true</LargeAddressAware>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>
@@ -196,6 +199,7 @@
       <StackReserveSize>4194304</StackReserveSize>
       <UACUIAccess>false</UACUIAccess>
       <LinkErrorReporting>NoErrorReport</LinkErrorReporting>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>

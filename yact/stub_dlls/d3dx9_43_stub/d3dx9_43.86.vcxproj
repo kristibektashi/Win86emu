@@ -47,6 +47,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
     <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -67,6 +68,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -86,6 +88,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
