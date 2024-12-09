@@ -106,6 +106,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -129,7 +131,7 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);shell32.lib</AdditionalDependencies>
       <StackReserveSize>3145728</StackReserveSize>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>dosbox_emu.map</MapFileName>
+      <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +152,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -180,6 +184,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);shell32.lib</AdditionalDependencies>
       <StackReserveSize>3145728</StackReserveSize>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(IntDir)dosbox_emu.map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
