@@ -19,7 +19,7 @@ t_CbRemoveCallAtThreadExit *CbRemoveCallAtThreadExit = 0;
 typedef BOOL t_func0(void);
 typedef DWORD t_func1(DWORD Addr, int NParams, ...);
 
-#if 1
+#if 0
 
 #ifdef _DEBUG
 #define NUM_DOSBOXES 1
