@@ -18,3 +18,5 @@
 *.lastbuildstate
 *.idb
 *.pch
+bin/
+obj/
