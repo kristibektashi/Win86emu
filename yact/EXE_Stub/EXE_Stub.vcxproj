@@ -71,26 +71,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\tools\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\tools\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\tools\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\tools\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\tools\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\tools\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\tools\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\tools\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -118,7 +118,8 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <EntryPointSymbol>EntryPoint</EntryPointSymbol>
       <SectionAlignment>16</SectionAlignment>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\tools\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -148,7 +149,8 @@
       <EntryPointSymbol>EntryPoint</EntryPointSymbol>
       <SectionAlignment>
       </SectionAlignment>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\tools\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -178,7 +180,8 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <EntryPointSymbol>EntryPoint</EntryPointSymbol>
       <SectionAlignment>16</SectionAlignment>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\tools\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -210,7 +213,8 @@
       <EntryPointSymbol>EntryPoint</EntryPointSymbol>
       <SectionAlignment>
       </SectionAlignment>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\tools\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

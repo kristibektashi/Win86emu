@@ -45,15 +45,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
-    <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\stub_dll\$(Configuration)\system32\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\stub_dll\$(Configuration)\system32\</OutDir>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)output\obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -68,7 +68,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\stub_dll\$(Configuration)\system32\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -88,7 +89,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\stub_dll\$(Configuration)\system32\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

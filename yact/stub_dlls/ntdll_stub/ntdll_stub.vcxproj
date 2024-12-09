@@ -43,14 +43,14 @@
     <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
-    <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\stub_dll\$(Configuration)\system32\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
-    <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\stub_dll\$(Configuration)\system32\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
@@ -72,7 +72,8 @@
       <TargetMachine>MachineX86</TargetMachine>
       <ModuleDefinitionFile>ntdll.def</ModuleDefinitionFile>
       <AdditionalDependencies>legacy_stdio_definitions.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\stub_dll\$(Configuration)\system32\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,7 +99,8 @@
       <TargetMachine>MachineX86</TargetMachine>
       <ModuleDefinitionFile>ntdll.def</ModuleDefinitionFile>
       <AdditionalDependencies>legacy_stdio_definitions.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\stub_dll\$(Configuration)\system32\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

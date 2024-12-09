@@ -18,6 +18,4 @@
 *.lastbuildstate
 *.idb
 *.pch
-bin/
-obj/
-pdb/
+output/

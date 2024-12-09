@@ -44,14 +44,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\;$(SolutionDir)yact\inc</IncludePath>
-    <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
-    <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\stub_dll\$(Configuration)\system32\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\;$(SolutionDir)yact\inc</IncludePath>
-    <OutDir>$(SolutionDir)bin\stub_dll\$(Configuration)\system32\</OutDir>
-    <IntDir>$(SolutionDir)obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\stub_dll\$(Configuration)\system32\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\stub_dll\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -66,7 +66,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\stub_dll\$(Configuration)\system32\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,7 +90,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\stub_dll\$(Configuration)\system32\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\stub_dll\$(Configuration)\system32\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

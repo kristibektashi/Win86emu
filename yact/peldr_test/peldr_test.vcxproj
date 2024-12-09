@@ -68,8 +68,8 @@
     <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <GenerateManifest>true</GenerateManifest>
@@ -77,20 +77,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +115,8 @@
       <UACUIAccess>
       </UACUIAccess>
       <EnableUAC>false</EnableUAC>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>
@@ -142,7 +143,8 @@
       <FixedBaseAddress>false</FixedBaseAddress>
       <StackReserveSize>4194304</StackReserveSize>
       <UACUIAccess>false</UACUIAccess>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>
@@ -170,7 +172,8 @@
       <FixedBaseAddress>false</FixedBaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
       <LargeAddressAware>true</LargeAddressAware>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>
@@ -199,7 +202,8 @@
       <StackReserveSize>4194304</StackReserveSize>
       <UACUIAccess>false</UACUIAccess>
       <LinkErrorReporting>NoErrorReport</LinkErrorReporting>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)yact\inc\inc_build.cmd</Command>

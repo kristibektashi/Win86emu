@@ -93,40 +93,40 @@
     <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
-    <IntDir>$(SolutionDir)obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
-    <IntDir>$(SolutionDir)obj\nativedll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
-    <IntDir>$(SolutionDir)obj\nativedll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
-    <IntDir>$(SolutionDir)obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
-    <IntDir>$(SolutionDir)obj\nativedll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
-    <IntDir>$(SolutionDir)obj\nativedll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -143,7 +143,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\SystemNT\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -162,7 +163,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);ComDlg32.Lib</AdditionalDependencies>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\SystemNT\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -180,7 +182,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);ComDlg32.Lib</AdditionalDependencies>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\SystemNT\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -200,7 +203,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\SystemNT\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -224,7 +228,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);ComDlg32.Lib</AdditionalDependencies>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\SystemNT\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -248,7 +253,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>kernel32.lib;user32.lib;%(AdditionalDependencies);ComDlg32.Lib</AdditionalDependencies>
-      <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(SolutionDir)output\pdb\$(Platform)\$(Configuration)\SystemNT\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(SolutionDir)output\lib\$(Platform)\$(Configuration)\SystemNT\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
