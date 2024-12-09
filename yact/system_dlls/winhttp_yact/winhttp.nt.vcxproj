@@ -100,14 +100,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_ARM);$(WindowsSDK_LibraryPath_ARM)</LibraryPath>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -115,14 +115,14 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory);$(VC_LibraryPath_ARM);$(WindowsSDK_LibraryPath_ARM)</LibraryPath>
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

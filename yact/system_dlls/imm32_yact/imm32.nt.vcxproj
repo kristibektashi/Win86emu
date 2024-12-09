@@ -93,7 +93,7 @@
     <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
@@ -101,7 +101,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,7 +111,7 @@
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
@@ -119,7 +119,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)yact\inc;$(SolutionDir)yact\</IncludePath>
-    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\SystemNT\</OutDir>
+    <OutDir>$(SolutionDir)output\bin\$(Platform)\$(Configuration)\Windows\SystemNT\</OutDir>
     <IntDir>$(SolutionDir)output\obj\native_dll\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
