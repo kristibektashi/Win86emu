@@ -51,7 +51,7 @@ int Ids[][2] = {
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-    HM = LoadLibraryExA("c:\\x86node\\Windows\\System32\\shell32.dll", 0, LOAD_LIBRARY_AS_IMAGE_RESOURCE | LOAD_LIBRARY_AS_DATAFILE);
+    HM = LoadLibraryExA(".\\Windows\\System32\\shell32.dll", 0, LOAD_LIBRARY_AS_IMAGE_RESOURCE | LOAD_LIBRARY_AS_DATAFILE);
     if (HM == 0)
     {
         puts("Unable to load x86 shell32.dll");

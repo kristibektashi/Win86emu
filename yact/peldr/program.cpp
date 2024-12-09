@@ -58,8 +58,8 @@ PE_EXPORT int PeLdrStartProgram(LPWSTR ExePath)
     wcscat_s(MyPath, L";c:\\windows;c:\\windows\\system32");
     SetEnvironmentVariableW(L"PATH", MyPath);
 
-    SetEnvironmentVariableA("ProgramFiles", "C:\\x86node\\Program Files");
-    SetEnvironmentVariableA("CommonProgramFiles", "C:\\x86node\\Program Files\\Common Files");
+    SetEnvironmentVariableA("ProgramFiles", ".\\Program Files");
+    SetEnvironmentVariableA("CommonProgramFiles", ".\\Program Files\\Common Files");
 
     DWORD Ret = GetModuleFileNameA(0, InstDir, MAX_PATH);
     char *P = strrchr(InstDir, '\\');
