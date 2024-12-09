@@ -1,0 +1,1 @@
+start .\Windows\lauch86c.cmd c:\x86node\Windows\regedit.86.exe

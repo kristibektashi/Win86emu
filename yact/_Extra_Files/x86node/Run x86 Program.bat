@@ -1,0 +1,1 @@
+start .\Windows\Launcher.exe
