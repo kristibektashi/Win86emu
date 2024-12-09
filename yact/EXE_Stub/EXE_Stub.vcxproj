@@ -146,7 +146,8 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <EntryPointSymbol>EntryPoint</EntryPointSymbol>
-      <SectionAlignment>16</SectionAlignment>
+      <SectionAlignment>
+      </SectionAlignment>
       <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
@@ -207,7 +208,8 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <EntryPointSymbol>EntryPoint</EntryPointSymbol>
-      <SectionAlignment>16</SectionAlignment>
+      <SectionAlignment>
+      </SectionAlignment>
       <ProgramDatabaseFile>$(SolutionDir)pdb\$(Platform)\$(Configuration)\tools\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
