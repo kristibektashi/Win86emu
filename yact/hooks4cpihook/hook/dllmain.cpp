@@ -9,7 +9,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        LoadLibraryA(".\\Windows\\cpihook.dll");
+        LoadLibraryA("C:\\x86node\\Windows\\cpihook.dll");
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:

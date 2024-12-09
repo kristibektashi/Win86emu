@@ -104,7 +104,7 @@ DWORD WINAPI ThreadProc(
 	PROCESS_INFORMATION pi;
 	memset(&si,0,sizeof(si));
 	si.cb=sizeof(si);
-	if(CreateProcessA(0,"c:\\Windows\\System32\\cmd.exe /c \"c:\\Windows\\System32\\reg.exe import .\\Windows\\SystemNT\\x86node.reg >%temp%\\initreg.log 2>&1\"",0,0,0,0,0,0,&si,&pi))
+	if(CreateProcessA(0,"c:\\Windows\\System32\\cmd.exe /c \"c:\\Windows\\System32\\reg.exe import c:\\x86node\\Windows\\SystemNT\\x86node.reg >%temp%\\initreg.log 2>&1\"",0,0,0,0,0,0,&si,&pi))
 	{
 		WaitForSingleObject(pi.hProcess,INFINITE);
 		LogInfo("Imported x86node.reg");
