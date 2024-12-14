@@ -11,5 +11,5 @@ https://github.com/MakiseKurisu/Win86emu (branch1)
 
 https://archive.org/details/win86emu (branch2)
 
-https://github.com/hiroki-repo/x86node-SP1-zip (branch2)
+https://github.com/hiroki-repo/x86node-SP1-zip (branch3)
 
