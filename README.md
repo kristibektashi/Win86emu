@@ -18,8 +18,10 @@ Build instructions:
 
 0. Install VS2019 and the Windows 8.1 SDK
 1. Clone this repo with git
-2. Build either Debug or Release configuration and either Win32 (a.k.a. x86) or ARM architecture. x64 is not supported
+2. Build either Debug or Release configuration and either Win32 (a.k.a. x86*) or ARM architecture. x64 is not supported
 3. Copy output\bin\<architecture>\<configuration>\ to C:\x86node\
 4. Copy output\bin\stub_dll\<configuration>\system32\ to C:\x86node\Windows\system32\
 5. Copy extras\x86node\ to C:\x86node\
 6. Run x86 programs using the batch files in C:\x86node\ (or manually, if you want to)
+
+*Yes you can build Win86Emu for x86 and therefore emulate x86 apps on x86, this is for debugging purposes mostly since you can just run these apps natively on x86 anyway
