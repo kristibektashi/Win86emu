@@ -1,5 +1,6 @@
 Win86emu
 ========
+CURRENTLY BROKEN!!!!!!
 
 Win86emu(Windows x86 Emulator) is a usermode emulator that runs leagacy x86 desktop programs on the Windows RT platform.
 
@@ -13,3 +14,11 @@ https://archive.org/details/win86emu (branch2)
 
 https://github.com/hiroki-repo/x86node-SP1-zip (branch3)
 
+Build instructions:
+
+1. Install VS2019 and Windows 8.1 SDK
+2. Build either Debug or Release configuration and either Win32 (a.k.a. x86) or ARM architecture. x64 is not supported
+3. Copy output\bin\<architecture>\<configuration>\ to C:\x86node\
+4. Copy output\bin\stub_dll\<configuration>\system32\ to C:\x86node\Windows\system32\
+5. Copy extras\x86node\ to C:\x86node\
+6. Run x86 programs using the batch files in C:\x86node\ (or manually, if you want to)
