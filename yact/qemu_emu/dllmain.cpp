@@ -1,7 +1,7 @@
 ﻿// dllmain.cpp : DLL アプリケーションのエントリ ポイントを定義します。
 #include "pch.h"
 
-#include "unicorn/unicorn/unicorn.h"
+#include <unicorn/unicorn.h>
 #include <string.h>
 
 #include "callbacks.h"
