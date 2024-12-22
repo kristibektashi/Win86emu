@@ -16,7 +16,8 @@ https://github.com/hiroki-repo/x86node-SP1-zip (branch3)
 
 Build instructions:
 
-1. Install VS2019 and Windows 8.1 SDK
+0. Install VS2019 and the Windows 8.1 SDK
+1. Clone this repo with git
 2. Build either Debug or Release configuration and either Win32 (a.k.a. x86) or ARM architecture. x64 is not supported
 3. Copy output\bin\<architecture>\<configuration>\ to C:\x86node\
 4. Copy output\bin\stub_dll\<configuration>\system32\ to C:\x86node\Windows\system32\
