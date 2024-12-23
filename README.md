@@ -24,4 +24,6 @@ Build instructions:
 5. Copy `extras\x86node\*.*` to `C:\x86node\`
 6. Run x86 programs using the batch files in C:\x86node\ (or manually, if you want to)
 
+PDB files are generated in `output\pdb\`
+
 *Yes you can build Win86Emu for x86 and therefore emulate x86 apps on x86, this is for debugging purposes mostly since you can just run these apps natively on x86 anyway
